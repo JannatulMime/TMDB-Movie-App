@@ -12,6 +12,7 @@ class SearchVM : ObservableObject {
     private let apiManager = ApiManager()
     @Published var movieList: [MovieApiModel] = [MovieApiModel]()
     @Published var searchText = ""
+    let movieApiService = MovieApiService()
     
 //    init(){
 //
@@ -19,14 +20,9 @@ class SearchVM : ObservableObject {
     
     @MainActor func getSearchData() {
         Task {
-            do {
-                let movieSearchResponse: MovieSearchApiDataModel = try await apiManager.request(url: "https://api.themoviedb.org/3/search/movie", searchQuery: searchText)
-                movieList = movieSearchResponse.results ?? [MovieApiModel]()
-              //  print("U>> movie list count \(movieList.count)")
-
-            } catch {
-                print(error)
-            }
+            let (data, error) = await movieApiService.searchMovie(searchKeyword: searchText)
+          //  let movieSearchResponse: MovieSearchApiDataModel = try await apiManager.request(url: "https://api.themoviedb.org/3/search/movie", searchQuery: searchText)
+            movieList = data?.results ?? [MovieApiModel]()
         }
     }
     

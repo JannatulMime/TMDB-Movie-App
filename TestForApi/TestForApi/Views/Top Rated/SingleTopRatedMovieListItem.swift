@@ -39,6 +39,7 @@ struct SingleTopRatedMovieListItem: View {
                         .tag(index)
                         .onTapGesture {
                             onMovieItemPressed(movie)
+                                 
                         }
                         
                 }

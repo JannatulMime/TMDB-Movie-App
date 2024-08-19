@@ -73,10 +73,12 @@ struct TabViews : View {
             Button(action: {
                 
             }) {
-                Image(systemName: "plus.circle.fill").renderingMode(.original)
+                Image(systemName: "plus.circle.fill")
+                    .resizable()
+                    .frame(width: 35, height:35)
             }
-            .foregroundStyle(Color.black)
-            .offset(y: -25)
+            .foregroundStyle(Color.blue)
+            .offset(y: -20)
             Spacer(minLength: 0)
 
             

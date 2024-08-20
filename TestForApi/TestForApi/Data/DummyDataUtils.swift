@@ -33,5 +33,16 @@ struct DummyCastData {
     
 }
 
+struct DummyTvSeries {
+    
+    static let dummyTvSeries1 = TvSeriesApiModel(originalName: "Renascer", posterPath: "/kUWvvMkNIf21UUDmHjYw55v6o7C.jpg", firstAirDate: "2024-01-22")
+    
+    static let dummyTvSeries2 = TvSeriesApiModel(originalName: "Família é Tudo", posterPath: "/tDbJuSfVhf3ZnxiJrXlXEALyAz5.jpg", firstAirDate: "2024-03-04")
+    
+    static let tvSeriesList = [dummyTvSeries1, dummyTvSeries2]
+}
+
+
+
 
 

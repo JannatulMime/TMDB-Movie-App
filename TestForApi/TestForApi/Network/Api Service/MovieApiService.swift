@@ -26,31 +26,7 @@ class MovieApiService {
     let apiHelper = APIHelper.shared
     
     init() {}
-
-//   
-//    func request<T: Decodable>(url: String) async throws -> T {
-//        
-//       
-//        
-//        guard let url = URL(string:  url) else {
-//            throw DataError.invalidURL
-//        }
-//        
-//        var request = URLRequest(url: url)
-//        request.setValue("Bearer \(token)", forHTTPHeaderField:"Authorization")
-//        
-//        let (data, response) = try await URLSession.shared.data(for: request)
-//        
-//      
-//        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-//            throw DataError.invalidResponse
-//        }
-//        let convertedString = String(data: data, encoding: .utf8)
-//       // print(convertedString)
-//        
-//        return try JSONDecoder().decode(T.self, from: data)
-//    }
-//    
+ 
     func getMovieListByType(listType: MovieListType) async -> (MovieListApiResponse?, ApiError?) {
 
         let url = listType.itemUrl

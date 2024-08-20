@@ -1,5 +1,5 @@
 //
-//  HorizontalSingleItem.swift
+//  VerticalSingleItem.swift
 //  TestForApi
 //
 //  Created by Habibur Rahman on 20/8/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HorizontalSingleItem: View {
+struct VerticalSingleItem: View {
     
     let tvSeries : TvSeriesApiModel
     
@@ -44,10 +44,10 @@ struct HorizontalSingleItem: View {
         }
         .frame(width: 150)
         
+    
     }
-    }
-
+}
 
 #Preview {
-    HorizontalSingleItem(tvSeries: DummyTvSeries.dummyTvSeries1)
+    VerticalSingleItem(tvSeries: DummyTvSeries.dummyTvSeries1)
 }

@@ -19,6 +19,7 @@ struct CustomTabView: View {
                     Color.black.opacity(0.05).edgesIgnoringSafeArea(.top)
                 }
                 else if self.index == 1 {
+                    
                     Color.red.edgesIgnoringSafeArea(.top)
                 }
                 else if self.index == 2 {

@@ -13,7 +13,7 @@ struct ContentView: View {
         
         NavigationStack{
             TabView {
-                MovieListView()
+               TvSeriesListView()
                     .tabItem {
                         VStack {
                             Image(systemName: "tv")

@@ -23,7 +23,7 @@ struct MovieListView: View {
                     
 
                     HorizontalMovieListWithTitle(movies: vm.nowPlayingMovies, title: "Now Playing", onMovieItemPressed: { movie in
-                        vm.selectedMovie = movie
+                        //vm.selectedMovie = movie
                         vm.goMovieDetailsPage = true
                     })
 
@@ -34,7 +34,7 @@ struct MovieListView: View {
                     })
 
                     HorizontalMovieListWithTitle(movies: vm.upComingMovies, title: "UPcoming", onMovieItemPressed:  { movie in
-                        vm.selectedMovie = movie
+                        //vm.selectedMovie = movie
                         vm.goMovieDetailsPage = true})
 
                         .onAppear {

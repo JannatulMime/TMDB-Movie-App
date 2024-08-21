@@ -22,20 +22,20 @@ struct TvSeriesListView: View {
                         .frame(width:  UIScreen.main.bounds.size.width, height: 300)
 
 
-                    HorizontalMovieListWithTitle(movies: vm.airingTodaySeries, title: "Airing Today", onMovieItemPressed: { movie in
-                                                vm.selectedMovie = movie
-                                                vm.goTvSeriesDetailsPage = true
-                                            })
+//                    HorizontalMovieListWithTitle(movies: vm.airingTodaySeries, title: "Airing Today", onMovieItemPressed: { movie in
+//                                                vm.selectedMovie = movie
+//                                                vm.goTvSeriesDetailsPage = true
+//                                            })
 
                    VerticalMovieListWithTitle(movies: vm.onTheAirSeries, title: "On The Air", onMovieItemPressed: { movie in
                         vm.selectedMovie = movie
                         vm.goTvSeriesDetailsPage = true
                     })
 
-                   HorizontalMovieListWithTitle(movies: vm.airingTodaySeries, title: "Popular", onMovieItemPressed: { movie in
-                        vm.selectedMovie = movie
-                        vm.goTvSeriesDetailsPage = true
-                    })
+//                   HorizontalMovieListWithTitle(movies: vm.airingTodaySeries, title: "Popular", onMovieItemPressed: { movie in
+//                        vm.selectedMovie = movie
+//                        vm.goTvSeriesDetailsPage = true
+//                    })
 
                         .onAppear {
                             vm.getTvSeriesList()

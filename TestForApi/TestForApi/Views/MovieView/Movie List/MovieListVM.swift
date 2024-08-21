@@ -17,10 +17,10 @@ class MovieListVM: ObservableObject {
     @Published var isLoading = false
     @Published var movieDetails: MovieApiModel?
 
-    @Published var nowPlayingMovies = [MovieApiModel]()
+    @Published var nowPlayingMovies = [CommonItemData]()
     @Published var popularMovies = [MovieApiModel]()
     @Published var topRatedMovies = [MovieApiModel]()
-    @Published var upComingMovies = [MovieApiModel]()
+    @Published var upComingMovies = [CommonItemData]()
 
     let movieApiService = MovieApiService()
 
@@ -44,9 +44,9 @@ class MovieListVM: ObservableObject {
 
             _ = await [nowPlaying, popular, topRated, upcoming]
 
-            self.nowPlayingMovies = await nowPlaying.0?.results ?? [MovieApiModel]()
+            self.nowPlayingMovies = await nowPlaying.0?.getCommonItemDataList() ?? [CommonItemData]()
             self.topRatedMovies = await topRated.0?.results ?? [MovieApiModel]()
-            self.upComingMovies = await upcoming.0?.results ?? [MovieApiModel]()
+            self.upComingMovies = await upcoming.0?.getCommonItemDataList() ?? [CommonItemData]()
             self.popularMovies = await popular.0?.results ?? [MovieApiModel]()
             isLoading = false
 

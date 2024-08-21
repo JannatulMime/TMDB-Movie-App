@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HorizontalMovieListSingleItem: View {
  
-    let movie : MovieApiModel
+    let movie : CommonItemData
 
     var body: some View {
        
@@ -20,7 +20,7 @@ struct HorizontalMovieListSingleItem: View {
                 .shadow(color: .brown.opacity(0.4), radius: 10, x: 5, y: 5)
                
            
-            Text(movie.originalTitle ?? "")
+            Text(movie.name ?? "")
                 .font(.caption)
                 .fontWeight(.bold)
                 .lineLimit(1)
@@ -48,5 +48,5 @@ struct HorizontalMovieListSingleItem: View {
 }
 
 #Preview {
-    HorizontalMovieListSingleItem(movie: DummyDataUtils.dummyMovieData01)
+    HorizontalMovieListSingleItem(movie: DummyDataUtils.dummyMovieData01.commonItemData)
 }

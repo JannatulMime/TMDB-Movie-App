@@ -21,6 +21,17 @@ struct MovieListApiResponse: Codable {
     }
 }
 
+extension MovieListApiResponse {
+    func getCommonItemDataList() -> [CommonItemData] {
+        guard let results = results , results.count > 0 else {return [CommonItemData]()}
+        var dataList = [CommonItemData]()
+        for result in results {
+            dataList.append(result.commonItemData)
+        }
+        return dataList
+    }
+}
+
 
 struct MovieApiModel: Codable, Identifiable {
     var adult: Bool?
@@ -65,6 +76,11 @@ struct MovieApiModel: Codable, Identifiable {
            case voteAverage = "vote_average"
            case voteCount = "vote_count"
        }
+    
+    
+    var commonItemData : CommonItemData {
+        return CommonItemData(id: id  , itemType: .movie, name: originalTitle , details: overview , posterPath: posterPath, backdropPath: backdropPath, voteAverage: voteAverage)
+    }
     
     static private let durationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()

@@ -9,10 +9,10 @@ import SwiftUI
 
 struct HorizontalMovieListWithTitle: View {
    
-    let movies: [MovieApiModel]
+    let movies: [CommonItemData]
     let title: String
     
-    var onMovieItemPressed : (MovieApiModel) -> Void
+    var onMovieItemPressed : (CommonItemData) -> Void
     
 
     var body: some View {
@@ -42,5 +42,5 @@ struct HorizontalMovieListWithTitle: View {
 }
 
 #Preview {
-    HorizontalMovieListWithTitle(movies: [DummyDataUtils.dummyMovieData01,DummyDataUtils.dummyMovieData02], title: "Now Playing", onMovieItemPressed: { _ in })
+    HorizontalMovieListWithTitle(movies: [DummyDataUtils.dummyMovieData01.commonItemData,DummyDataUtils.dummyMovieData02.commonItemData], title: "Now Playing", onMovieItemPressed: { _ in })
 }

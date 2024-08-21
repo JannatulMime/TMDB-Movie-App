@@ -28,7 +28,7 @@ class TvSeriesApiService {
     
     init() {}
  
-    func getTvSeriesListByType(listType: TvSeriesListType) async -> (TvSeriesApiResponseModel?, ApiError?) {
+    func getTvSeriesListByType(listType: TvSeriesListType) async -> (MovieListApiResponse?, ApiError?) {
 
         let url = listType.itemUrl
         
@@ -37,7 +37,24 @@ class TvSeriesApiService {
             let request = try apiHelper.prepareRequest(apiType: ApiType.GET, url: url, needAuth : true)
             
             let (data, _) = try await client.callApi(request: request)
-            let resultObj: TvSeriesApiResponseModel? = try ResponseParser().parseResponse(from: data)
+            let resultObj: MovieListApiResponse? = try ResponseParser().parseResponse(from: data)
+            return (resultObj, nil)
+
+        } catch {
+            return (nil, error as? ApiError)
+        }
+    }
+    
+    func getSeriesDetailsBy(id : Int) async -> (MovieApiModel?, ApiError?) {
+
+        let url = BaseUrl + version +  "/tv/" + "\(id)"
+        
+    //    let queryDic: [String: String] = ["inspectionId": inspectionId, "areaId": inspectionId]
+        do {
+            let request = try apiHelper.prepareRequest(apiType: ApiType.GET, url: url, needAuth : true)
+            
+            let (data, _) = try await client.callApi(request: request)
+            let resultObj: MovieApiModel? = try ResponseParser().parseResponse(from: data)
             return (resultObj, nil)
 
         } catch {

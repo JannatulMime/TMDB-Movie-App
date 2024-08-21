@@ -11,6 +11,7 @@ import Foundation
 class MovieDetailsVM : ObservableObject {
     
     let apiManager = ApiManager()
+    let seriesApiService = TvSeriesApiService()
     
     @Published var casts : [Cast] = [Cast]()
     @Published var movieDetails: MovieApiModel?
@@ -56,8 +57,12 @@ class MovieDetailsVM : ObservableObject {
     func loadTvSeriesData(seriesId : Int) {
         Task {
             do {
-                let movieDetailsResponse: MovieApiModel = try await apiManager.request(url: "https://api.themoviedb.org/3/tv/\(seriesId)")
-                self.movieDetails = movieDetailsResponse
+                
+                //async let nowPlaying = movieApiService.getMovieListByType(listType: .NowPlaying)
+                let (detailsData, error) = await seriesApiService.getSeriesDetailsBy(id: seriesId)
+              
+            //    let movieDetailsResponse: MovieApiModel = try await apiManager.request(url: "https://api.themoviedb.org/3/tv/\(seriesId)")
+                self.movieDetails = detailsData
                 if let poster = self.movieDetails?.backdropPath {
                     backdropImage = "https://image.tmdb.org/t/p/original\(poster)"
                 }

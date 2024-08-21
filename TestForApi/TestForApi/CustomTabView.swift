@@ -16,11 +16,13 @@ struct CustomTabView: View {
             ZStack {
                 
                 if self.index == 0 {
-                    Color.black.opacity(0.05).edgesIgnoringSafeArea(.top)
+                   // Color.black.opacity(0.05).edgesIgnoringSafeArea(.top)
+                    MovieListView()
                 }
                 else if self.index == 1 {
                     
-                    Color.red.edgesIgnoringSafeArea(.top)
+                   // Color.red.edgesIgnoringSafeArea(.top)
+                    
                 }
                 else if self.index == 2 {
                     Color.green.edgesIgnoringSafeArea(.top)

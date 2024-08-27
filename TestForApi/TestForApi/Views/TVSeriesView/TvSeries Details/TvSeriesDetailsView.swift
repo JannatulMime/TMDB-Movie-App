@@ -8,10 +8,52 @@
 import SwiftUI
 
 struct TvSeriesDetailsView: View {
+    
+    var seriesId = 223365
+    @StateObject var vm = TvSeriesDetailsVM()
+    
     var body: some View {
-        Text("Details")
-    }
+        ZStack (alignment : .top) {
+         
+            RemoteImage(imagePath: vm.backdropImage)
+                .clipShape(Rectangle())
+                .frame(width: UIScreen.main.bounds.width, height: 320)
+                .scaledToFill()
+       
+            VStack {
+                SeriesBottomDetails(tvSeries: $vm.tvSeriesDetails, onSeriesItemPressed: { Details in
+                   vm.goGenreSeriesListPage = true
+                  // vm.selectedMovie = Details
+               })
+                .padding(.top,300)
+                .padding(.horizontal,0)
+                   
+                Spacer()
+            }
+            .navigationDestination(isPresented: $vm.goGenreSeriesListPage) {
+                GenreMovieList()
+            }
+            
+            .navigationDestination(isPresented: $vm.goCastDetailsPage) {
+               CastDetails()
+            }
+            
+            
+        }
+        .background(Color.white)
+        .onAppear{
+            //vm.loadMovieData(movieId: movieId)
+                vm.loadTvSeriesData(seriesId: seriesId)
+        }
+        //.frame(width: UIScreen.main.bounds.width)
+    .ignoresSafeArea()
+     
 }
+
+
+
+    }
+
 
 #Preview {
     TvSeriesDetailsView()

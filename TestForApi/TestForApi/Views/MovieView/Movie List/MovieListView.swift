@@ -16,7 +16,7 @@ struct MovieListView: View {
             ScrollView {
                 VStack(spacing: 5) {
                     SingleTopRatedMovieListItem(movies: vm.topRatedMovies, onMovieItemPressed: { movie in
-                        vm.selectedMovie = movie
+                        //vm.selectedMovie = movie
                         vm.goMovieDetailsPage = true
                     })
                         .frame(width:  UIScreen.main.bounds.size.width, height: 300)
@@ -28,7 +28,7 @@ struct MovieListView: View {
                     })
 
                     VerticalMovieListWithTitle(movies: vm.popularMovies, title: "Popular", onMovieItemPressed: { movie in
-                        vm.selectedMovie = movie
+                       // vm.selectedMovie = movie
                         vm.goMovieDetailsPage = true
                         
                     })

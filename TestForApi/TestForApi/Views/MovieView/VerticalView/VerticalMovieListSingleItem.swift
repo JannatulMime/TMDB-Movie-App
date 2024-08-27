@@ -1,5 +1,5 @@
 //
-//  PopularSingleView.swift
+//  VerticalMovieListSingleItem.swift
 //  TestForApi
 //
 //  Created by Habibur Rahman on 18/7/24.
@@ -9,7 +9,7 @@ import SwiftUI
 
 struct VerticalMovieListSingleItem: View {
     
-    let movie : MovieApiModel
+    let movie : CommonItemData
     
     var body: some View {
         HStack(spacing: 10) {
@@ -23,7 +23,7 @@ struct VerticalMovieListSingleItem: View {
            
             
             VStack(alignment: .leading, spacing: 5) {
-                Text(movie.originalTitle ?? "")
+                Text(movie.name ?? "")
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .lineLimit(2)
@@ -54,5 +54,5 @@ struct VerticalMovieListSingleItem: View {
 }
 
 #Preview {
-    VerticalMovieListSingleItem(movie: DummyDataUtils.dummyMovieData01)
+    VerticalMovieListSingleItem(movie: DummyDataUtils.dummyMovieData01.commonItemData)
 }

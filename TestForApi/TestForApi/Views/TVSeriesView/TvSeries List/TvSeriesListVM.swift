@@ -12,15 +12,15 @@ class TvSeriesListVM: ObservableObject {
     let apiManager = ApiManager()
     
     @Published var goTvSeriesDetailsPage: Bool = false
-    @Published var selectedMovie: MovieApiModel?
+    @Published var selectedId : Int?
     
     @Published var isLoading = false
     @Published var tvSeriesDetails: MovieApiModel?
     
-    @Published var airingTodaySeries = [MovieApiModel]()
-    @Published var onTheAirSeries = [MovieApiModel]()
-    @Published var popularSeries = [MovieApiModel]()
-    @Published var topRatedSeries = [MovieApiModel]()
+    @Published var airingTodaySeries = [CommonItemData]()
+    @Published var onTheAirSeries = [CommonItemData]()
+    @Published var popularSeries = [CommonItemData]()
+    @Published var topRatedSeries = [CommonItemData]()
     
     let tvSeriesApiService = TvSeriesApiService()
     
@@ -38,10 +38,10 @@ class TvSeriesListVM: ObservableObject {
             
             _ = await [airingToday, onTheAir, popular, topRated]
             
-            self.airingTodaySeries = await airingToday.0?.results ?? [MovieApiModel]()
-            self.onTheAirSeries = await onTheAir.0?.results ?? [MovieApiModel]()
-            self.popularSeries = await popular.0?.results ?? [MovieApiModel]()
-            self.topRatedSeries = await topRated.0?.results ?? [MovieApiModel]()
+            self.airingTodaySeries = await airingToday.0?.getCommonItemDataList() ?? [CommonItemData]()
+            self.onTheAirSeries = await onTheAir.0?.getCommonItemDataList() ?? [CommonItemData]()
+            self.popularSeries = await popular.0?.getCommonItemDataList() ?? [CommonItemData]()
+            self.topRatedSeries = await topRated.0?.getCommonItemDataList() ?? [CommonItemData]()
             isLoading = false
             
         }

@@ -1,5 +1,5 @@
 //
-//  SingleNowPlayingView.swift
+//  HorizontalMovieListSingleItem.swift
 //  TestForApi
 //
 //  Created by Habibur Rahman on 30/6/24.

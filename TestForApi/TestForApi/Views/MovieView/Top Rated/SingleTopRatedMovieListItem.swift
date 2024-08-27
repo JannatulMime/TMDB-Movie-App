@@ -10,9 +10,9 @@ import SwiftUI
 struct SingleTopRatedMovieListItem: View {
     @State private var currentPage = 0
 
-    let movies: [MovieApiModel]
-    var onMovieItemPressed : (MovieApiModel) -> Void
-
+    let movies: [CommonItemData]
+    var onMovieItemPressed : (CommonItemData) -> Void
+    
     var body: some View {
         VStack {
             TabView(selection: $currentPage) {
@@ -29,7 +29,7 @@ struct SingleTopRatedMovieListItem: View {
                                 LinearGradient(gradient: Gradient(colors: [.orange, .pink]), startPoint: .top, endPoint: .bottom)
                             )
 
-                        Text(movie.originalTitle ?? "")
+                        Text(movie.name ?? "")
                             .font(.headline)
                             .foregroundStyle(.white)
                             .padding(.vertical, 60)
@@ -62,8 +62,6 @@ struct SingleTopRatedMovieListItem: View {
 }
 
 #Preview {
-    SingleTopRatedMovieListItem(movies: [DummyDataUtils.dummyMovieData01,
-                                         DummyDataUtils.dummyMovieData02,
-                                         DummyDataUtils.dummyMovieData02], onMovieItemPressed: { _ in })
+    SingleTopRatedMovieListItem(movies: [DummyDataUtils.dummyMovieData01.commonItemData,DummyDataUtils.dummyMovieData02.commonItemData], onMovieItemPressed: { _ in })
 }
 

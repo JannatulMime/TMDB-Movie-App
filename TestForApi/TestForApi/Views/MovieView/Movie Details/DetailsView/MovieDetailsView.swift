@@ -10,7 +10,7 @@ struct MovieDetailsView: View {
     
     @StateObject var vm = MovieDetailsVM()
     var movieId = 1022789
-    var seriesId = 223365
+   
 
     var body: some View {
        
@@ -46,8 +46,8 @@ struct MovieDetailsView: View {
             }
             .background(Color.white)
             .onAppear{
-               // vm.loadMovieData(movieId: movieId)
-                vm.loadTvSeriesData(seriesId: seriesId)
+                vm.loadMovieData(movieId: movieId)
+//                vm.loadTvSeriesData(seriesId: seriesId)
             }
             //.frame(width: UIScreen.main.bounds.width)
         .ignoresSafeArea()

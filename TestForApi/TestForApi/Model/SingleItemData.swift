@@ -23,7 +23,6 @@ struct CommonItemData : Identifiable {
     var voteAverage : Double?
     
     
-    
     var ratingText: String {
         let rating = Int(voteAverage ?? 0.0)
         let ratingText = (0..<rating).reduce("") { (acc, _) -> String in
@@ -31,6 +30,7 @@ struct CommonItemData : Identifiable {
         }
         return ratingText
     }
+    
     var scoreText: String {
         guard ratingText.count > 0 else {
             return "n/a"

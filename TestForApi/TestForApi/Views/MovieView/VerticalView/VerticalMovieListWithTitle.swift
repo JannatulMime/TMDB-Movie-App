@@ -1,5 +1,5 @@
 //
-//  PopularView.swift
+//  VerticalMovieListWithTitle.swift
 //  TestForApi
 //
 //  Created by Habibur Rahman on 18/7/24.
@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct VerticalMovieListWithTitle: View {
-    let movies: [MovieApiModel]
-    let title: String
-   
-    var onMovieItemPressed : (MovieApiModel) -> Void
     
+     let movies: [CommonItemData]
+     let title: String
+     
+     var onMovieItemPressed : (CommonItemData) -> Void
+     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
@@ -44,5 +45,5 @@ struct VerticalMovieListWithTitle: View {
 }
 
 #Preview {
-    VerticalMovieListWithTitle(movies: [DummyDataUtils.dummyMovieData01,DummyDataUtils.dummyMovieData02], title: "Popular", onMovieItemPressed: { _ in })
+    VerticalMovieListWithTitle(movies: [DummyDataUtils.dummyMovieData01.commonItemData,DummyDataUtils.dummyMovieData02.commonItemData], title: "Popular", onMovieItemPressed: { _ in })
 }

@@ -1,5 +1,5 @@
 //
-//  NowPlayingView.swift
+//  HorizontalMovieListWithTitle.swift
 //  TestForApi
 //
 //  Created by Habibur Rahman on 3/7/24.

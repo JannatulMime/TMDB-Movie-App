@@ -9,6 +9,7 @@ import Foundation
 
 @MainActor
 class MovieListVM: ObservableObject {
+    
     let apiManager = ApiManager()
 
     @Published var goMovieDetailsPage: Bool = false
@@ -18,8 +19,8 @@ class MovieListVM: ObservableObject {
     @Published var movieDetails: MovieApiModel?
 
     @Published var nowPlayingMovies = [CommonItemData]()
-    @Published var popularMovies = [MovieApiModel]()
-    @Published var topRatedMovies = [MovieApiModel]()
+    @Published var popularMovies = [CommonItemData]()
+    @Published var topRatedMovies = [CommonItemData]()
     @Published var upComingMovies = [CommonItemData]()
 
     let movieApiService = MovieApiService()
@@ -45,9 +46,9 @@ class MovieListVM: ObservableObject {
             _ = await [nowPlaying, popular, topRated, upcoming]
 
             self.nowPlayingMovies = await nowPlaying.0?.getCommonItemDataList() ?? [CommonItemData]()
-            self.topRatedMovies = await topRated.0?.results ?? [MovieApiModel]()
+            self.topRatedMovies = await topRated.0?.getCommonItemDataList()  ?? [CommonItemData]()
             self.upComingMovies = await upcoming.0?.getCommonItemDataList() ?? [CommonItemData]()
-            self.popularMovies = await popular.0?.results ?? [MovieApiModel]()
+            self.popularMovies = await popular.0?.getCommonItemDataList() ?? [CommonItemData]()
             isLoading = false
 
             //              do {

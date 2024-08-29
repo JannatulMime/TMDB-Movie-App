@@ -52,7 +52,9 @@ struct SingleTopRatedMovieListItem: View {
             Spacer()
                 .onReceive(timer) { _ in
                     withAnimation {
-                         currentPage = (currentPage + 1) % movies.count
+                        if movies.count > 0 {
+                            currentPage = (currentPage + 1) % movies.count
+                        }
                     }
                 }
         }

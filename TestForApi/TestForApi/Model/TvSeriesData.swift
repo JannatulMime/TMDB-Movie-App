@@ -32,11 +32,12 @@ struct TvSeriesApiModel: Codable, Identifiable {
     var posterPath, firstAirDate, name: String?
     var voteAverage: Double?
     var voteCount, runtime: Int?
+    var spokenLanguages: [SpokenLanguage]?
 
     enum CodingKeys: String, CodingKey {
         case adult
         case backdropPath = "backdrop_path"
-        case genres = "genre"
+        case genres = "genres"
         case genreIDS = "genre_ids"
         case id
         case originCountry = "origin_country"
@@ -48,12 +49,9 @@ struct TvSeriesApiModel: Codable, Identifiable {
         case name
         case voteAverage = "vote_average"
         case voteCount, runtime
+        case spokenLanguages = "spoken_languages"
     }
     
-    struct Genre: Codable, Identifiable {
-        let id: Int?
-        let name: String?
-    }
 
     var ratingText: String {
         let rating = Int(voteAverage ?? 0.0)

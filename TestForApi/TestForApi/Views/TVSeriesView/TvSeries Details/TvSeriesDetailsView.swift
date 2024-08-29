@@ -21,10 +21,14 @@ struct TvSeriesDetailsView: View {
                 .scaledToFill()
        
             VStack {
-                SeriesBottomDetails(tvSeries: $vm.tvSeriesDetails, onSeriesItemPressed: { Details in
-                   vm.goGenreSeriesListPage = true
+                SeriesBottomDetails(tvSeries: $vm.tvSeriesDetails, casts: $vm.casts, onSeriesItemPressed: { Details in
+                    vm.goGenreSeriesListPage = true
+                }, onPressed: { detailsCast in
+                    vm.goCastDetailsPage = true
                   // vm.selectedMovie = Details
                })
+                
+                
                 .padding(.top,300)
                 .padding(.horizontal,0)
                    

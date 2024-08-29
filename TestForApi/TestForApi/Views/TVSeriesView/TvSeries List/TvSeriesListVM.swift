@@ -9,7 +9,8 @@ import Foundation
 
 @MainActor
 class TvSeriesListVM: ObservableObject {
-    let apiManager = ApiManager()
+    
+    let tvSeriesApiService = TvSeriesApiService()
     
     @Published var goTvSeriesDetailsPage: Bool = false
     @Published var selectedId : Int?
@@ -22,12 +23,12 @@ class TvSeriesListVM: ObservableObject {
     @Published var popularSeries = [CommonItemData]()
     @Published var topRatedSeries = [CommonItemData]()
     
-    let tvSeriesApiService = TvSeriesApiService()
     
     init() {
         isLoading = false
         getTvSeriesList()
     }
+    
     func getTvSeriesList() {
         isLoading = true
         Task {

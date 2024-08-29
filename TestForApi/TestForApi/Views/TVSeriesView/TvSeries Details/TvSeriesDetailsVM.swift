@@ -11,7 +11,6 @@ import Foundation
 class TvSeriesDetailsVM : ObservableObject {
     
     let seriesApiService = TvSeriesApiService()
-//    let apiManager = ApiManager()
     
     @Published var casts : [Cast] = [Cast]()
     @Published var tvSeriesDetails: TvSeriesApiModel?

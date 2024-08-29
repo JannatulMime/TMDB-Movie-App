@@ -13,12 +13,12 @@ struct SeriesBottomDetails: View {
     @State var isViewed = false
     @Binding var tvSeries : TvSeriesApiModel?
    
-   // @Binding var casts: [Cast]
+    @Binding var casts: [Cast]
    // @Binding var movie : MovieApiModel?
 
     var seriesId = 1022789
     var onSeriesItemPressed : (Genre) -> Void
-   // var onPressed : (Cast) -> Void
+    var onPressed : (Cast) -> Void
 
 //    init(movie : MovieApiModel?, casts : [Cast]){
 //        _vm = StateObject(wrappedValue: BottomMovieDetailsVM(movieData: movie, casts: casts))
@@ -29,7 +29,7 @@ struct SeriesBottomDetails: View {
             VStack(spacing: 10) {
                 tvSeriesTitleWithBookMark
                 seriesRatingAndScoreText
-               // textOnCapsuleOfSeries
+                genraListView
                 tvDateTimeAndLanguage
                 description
 
@@ -45,24 +45,24 @@ struct SeriesBottomDetails: View {
         .ignoresSafeArea()
     }
 
-//    func getCastProfileImage(imageName: String?) -> String {
-//        if let image = imageName {
-//            let imagePath = "https://image.tmdb.org/t/p/original\(image)"
-//            print("U>> image \(imagePath)")
-//            return imagePath
-//        }
-//        return ""
-//    }
+    func getCastProfileImage(imageName: String?) -> String {
+        if let image = imageName {
+            let imagePath = "https://image.tmdb.org/t/p/original\(image)"
+            print("U>> image \(imagePath)")
+            return imagePath
+        }
+        return ""
+    }
 }
 #Preview {
-    SeriesBottomDetails (tvSeries: .constant( DummyTvSeries.dummyTvSeries1), onSeriesItemPressed: { _ in })/*, onPressed: onPressed,: { _ in })*/
-    // BottomDetails( movie: <#MovieApiModel#>)
+    SeriesBottomDetails (tvSeries: .constant( DummyTvSeries.dummyTvSeries1), casts: .constant(DummyCastData.castList), onSeriesItemPressed: { _ in }, onPressed: { _ in })
+   
 }
 
 extension SeriesBottomDetails {
     var tvSeriesTitleWithBookMark: some View {
         HStack {
-            Text(tvSeries?.name ?? "noData")
+            Text(tvSeries?.originalName ?? "noData")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundStyle(.pink)
@@ -91,34 +91,20 @@ extension SeriesBottomDetails  {
     }
 }
 
-//extension SeriesBottomDetails  {
-//  
-//    var textOnCapsuleOfSeries: some View {
-//        
-//        HStack {
-//            if let genras = tvSeries?.genres {
-//              
-//                HStack(spacing: 10) {
-//                    ForEach(genras) { genra in
-//                        Capsule()
-//                            .fill(Color.blueis)
-//                            .frame(width: 70, height: 27)
-//                            .overlay(
-//                                Text(genra.name ?? "")
-//                            )
-//                            .onTapGesture {
-//                               onSeriesItemPressed(genra)
-//                            }
-//                    }
-//                }
-//            }
-//
-//            Spacer()
-//        }
-//        .font(.caption)
-//        .foregroundStyle(.blue)
-//    }
-//}
+extension SeriesBottomDetails  {
+  
+    var genraListView: some View {
+        
+        HStack {
+            if let genras = tvSeries?.genres {
+                GenraListView(genras: genras)
+            }
+            Spacer()
+        }
+      
+        .foregroundStyle(.blue)
+    }
+}
 
 extension SeriesBottomDetails  {
     var tvDateTimeAndLanguage: some View {
@@ -172,33 +158,33 @@ extension SeriesBottomDetails  {
     }
 }
 
-//extension SeriesBottomDetails  {
-//    var castView: some View {
-//        VStack(alignment: .leading, spacing: 10) {
-//            HStack {
-//                Text("Cast")
-//                    .font(.title3)
-//                    .fontWeight(.bold)
-//                Spacer()
-//            }
-//
-//            ScrollView(.horizontal) {
-//                HStack(spacing: 10) {
-//                    ForEach(casts) { cast in
-//
-//                        let imagePath = getCastProfileImage(imageName: cast.profilePath)
-//
-//                        CastView(name: cast.name ?? "noData", profilePath: imagePath)
-//                            .onTapGesture {
-//                                onPressed(cast)
-//                            }
-//                    }
-//                }
-//            }
-//        }
-//        .onAppear {
-//            // $vm.loadData(movieId: movieId)
-//        }
-//    }
-//}
+extension SeriesBottomDetails  {
+    var castView: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text("Cast")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                Spacer()
+            }
+
+            ScrollView(.horizontal) {
+                HStack(spacing: 10) {
+                    ForEach(casts) { cast in
+
+                        let imagePath = getCastProfileImage(imageName: cast.profilePath)
+
+                        CastView(name: cast.name ?? "noData", profilePath: imagePath)
+                            .onTapGesture {
+                                onPressed(cast)
+                            }
+                    }
+                }
+            }
+        }
+        .onAppear {
+            // $vm.loadData(movieId: movieId)
+        }
+    }
+}
 

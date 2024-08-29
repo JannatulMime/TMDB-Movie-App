@@ -64,7 +64,6 @@ class TvSeriesApiService {
     
     func getSeriesCreditsBy(id : Int) async -> (MovieCreditApiResponseModel?, ApiError?) {
 
-        
         //https://api.themoviedb.org/3/tv/{series_id}/credits
         let url = BaseUrl + version +  "/tv/" + "\(id)/credits"
         
@@ -80,6 +79,7 @@ class TvSeriesApiService {
             return (nil, error as? ApiError)
         }
     }
+    
     
     func searchMovie(searchKeyword: String) async -> (MovieSearchApiDataModel?, ApiError?) {
 

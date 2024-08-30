@@ -14,6 +14,7 @@ class TvSeriesDetailsVM : ObservableObject {
     
     @Published var casts : [Cast] = [Cast]()
     @Published var tvSeriesDetails: TvSeriesApiModel?
+    @Published var similarSeries : [MovieApiModel]?
     @Published var backdropImage: String = ""
     @Published var goGenreSeriesListPage : Bool = false
     @Published var goCastDetailsPage : Bool = false
@@ -43,6 +44,11 @@ class TvSeriesDetailsVM : ObservableObject {
                     self.casts = casts
                 }
             }
+            
+            let (similarSeries,_) = await seriesApiService.getSimilarTvSeries(id: seriesId)
+            self.similarSeries = similarSeries?.results
+
+            
         }
     }
 

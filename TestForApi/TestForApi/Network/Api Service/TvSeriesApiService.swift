@@ -80,6 +80,24 @@ class TvSeriesApiService {
         }
     }
     
+    func getSimilarTvSeries(id : Int) async -> (SimilarMovieApiResponseData?, ApiError?) {
+
+        //https://api.themoviedb.org/3/tv/{series_id}/credits
+        let url = BaseUrl + version +  "/tv/" + "\(id)/similar"
+        
+    //    let queryDic: [String: String] = ["inspectionId": inspectionId, "areaId": inspectionId]
+        do {
+            let request = try apiHelper.prepareRequest(apiType: ApiType.GET, url: url, needAuth : true)
+            
+            let (data, _) = try await client.callApi(request: request)
+            let resultObj: SimilarMovieApiResponseData? = try ResponseParser().parseResponse(from: data)
+            return (resultObj, nil)
+
+        } catch {
+            return (nil, error as? ApiError)
+        }
+    }
+    
     
     func searchMovie(searchKeyword: String) async -> (MovieSearchApiDataModel?, ApiError?) {
 

@@ -22,6 +22,7 @@ class MovieListVM: ObservableObject {
     @Published var popularMovies = [CommonItemData]()
     @Published var topRatedMovies = [CommonItemData]()
     @Published var upComingMovies = [CommonItemData]()
+   // @Published var similar = [CommonItemData]()
 
     let movieApiService = MovieApiService()
 
@@ -42,6 +43,8 @@ class MovieListVM: ObservableObject {
             async let popular = movieApiService.getMovieListByType(listType: .Popular)
             async let topRated = movieApiService.getMovieListByType(listType: .TopRated)
             async let upcoming = movieApiService.getMovieListByType(listType: .upcoming)
+           // async let similar = movieApiService.getMovieListByType(listType: .similar)
+
 
             _ = await [nowPlaying, popular, topRated, upcoming]
 
@@ -49,27 +52,9 @@ class MovieListVM: ObservableObject {
             self.topRatedMovies = await topRated.0?.getCommonItemDataList()  ?? [CommonItemData]()
             self.upComingMovies = await upcoming.0?.getCommonItemDataList() ?? [CommonItemData]()
             self.popularMovies = await popular.0?.getCommonItemDataList() ?? [CommonItemData]()
+          //  self.similar = await similar.0?.getCommonItemDataList() ?? [CommonItemData]()
             isLoading = false
 
-            //              do {
-
-//                    let popularMovieResponse: MovieListApiResponse = try await apiManager.request(url: "https://api.themoviedb.org/3/movie/popular")
-//                    self.popularMovies = popularMovieResponse.results ?? [MovieApiModel]()
-//
-//                    let topRatedMovieResponse: MovieListApiResponse = try await apiManager.request(url:
-//                                                                                                    "https://api.themoviedb.org/3/movie/top_rated")
-//                    self.topRatedMovies = topRatedMovieResponse.results ?? [MovieApiModel]()
-//
-//                    let upComingMovieResponse: MovieListApiResponse = try await apiManager.request(url:
-//                                                                                                    "https://api.themoviedb.org/3/movie/upcoming")
-//                    self.upComingMovies = upComingMovieResponse.results ?? [MovieApiModel]()
-
-//                    isLoading = false
-
-//                } catch {
-//                    print(error)
-//                    isLoading = false
-//                }
         }
     }
 }

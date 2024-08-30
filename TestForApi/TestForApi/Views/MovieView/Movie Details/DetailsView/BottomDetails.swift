@@ -10,6 +10,8 @@ import SwiftUI
 struct BottomDetails: View {
     // @StateObject var vm : BottomMovieDetailsVM = BottomMovieDetailsVM()
    
+    @StateObject var vm = BottomMovieDetailsVM()
+
     @State var isViewed = false
     @Binding var movie: MovieApiModel?
     @Binding var casts: [Cast]
@@ -32,8 +34,10 @@ struct BottomDetails: View {
                 description
 
                 castView
-                    .padding(.bottom, 100)
-
+                  
+                
+                similarView
+                // .padding(.bottom, 100)
                 Spacer()
             }
         }
@@ -173,6 +177,7 @@ extension BottomDetails {
 }
 
 extension BottomDetails {
+    
     var castView: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
@@ -199,5 +204,16 @@ extension BottomDetails {
         .onAppear {
             // $vm.loadData(movieId: movieId)
         }
+    }
+}
+
+extension BottomDetails {
+    var similarView: some View {
+        
+        HorizontalMovieListWithTitle(movies: vm.similar, title: "Recommend", onMovieItemPressed: { movie in
+            //vm.selectedMovie = movie
+            //vm.goMovieDetailsPage = true
+        })
+
     }
 }

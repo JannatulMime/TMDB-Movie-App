@@ -39,7 +39,7 @@ struct TvSeriesDetailsView: View {
             }
             
             .navigationDestination(isPresented: $vm.goCastDetailsPage) {
-               CastDetails()
+              // CastDetails()
             }
             
             

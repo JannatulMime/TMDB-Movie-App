@@ -14,21 +14,21 @@ struct ContentView: View {
         NavigationStack{
             TabView {
                 
+                MovieListView()
+                     .tabItem {
+                         VStack {
+                             Image(systemName: "movieclapper")
+                             Text("Movie")
+                         }
+                     }.tag(0)
+                
                 TvSeriesListView()
                      .tabItem {
                          VStack {
                              Image(systemName: "tv")
-                             Text("Movies")
+                             Text("TV")
                          }
-                     }.tag(0)
-                
-               MovieListView()
-                    .tabItem {
-                        VStack {
-                            Image(systemName: "movieclapper")
-                            Text("Tv Series")
-                        }
-                    }.tag(1)
+                     }.tag(1)
                 
                  MovieSearchView()
                     .tabItem {

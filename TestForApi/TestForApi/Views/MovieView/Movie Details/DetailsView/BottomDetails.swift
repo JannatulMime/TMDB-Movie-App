@@ -15,7 +15,8 @@ struct BottomDetails: View {
     @State var isViewed = false
     @Binding var movie: MovieApiModel?
     @Binding var casts: [Cast]
-
+    @Binding var similarMovie : [CommonItemData] 
+    
     var movieId = 1022789
     var onMovieItemPressed : (Genre) -> Void
     var onPressed : (Cast) -> Void
@@ -58,8 +59,8 @@ struct BottomDetails: View {
 }
 
 #Preview {
-    BottomDetails(movie: .constant(DummyDataUtils.dummyMovieData01), casts: .constant(DummyCastData.castList), onMovieItemPressed: { _ in }, onPressed: { _ in })
-    // BottomDetails( movie: <#MovieApiModel#>)
+    BottomDetails(movie: .constant(DummyDataUtils.dummyMovieData01), casts: .constant(DummyCastData.castList), similarMovie: .constant([]) ,onMovieItemPressed: { _ in }, onPressed: { _ in })
+   
 }
 
 extension BottomDetails {
@@ -210,8 +211,8 @@ extension BottomDetails {
 extension BottomDetails {
     var similarView: some View {
         
-        HorizontalMovieListWithTitle(movies: vm.similar, title: "Recommend", onMovieItemPressed: { movie in
-            //vm.selectedMovie = movie
+        HorizontalMovieListWithTitle(movies: similarMovie, title: "Recommend", onMovieItemPressed: { movie in
+            vm.selectedMovie = movie.id
             //vm.goMovieDetailsPage = true
         })
 

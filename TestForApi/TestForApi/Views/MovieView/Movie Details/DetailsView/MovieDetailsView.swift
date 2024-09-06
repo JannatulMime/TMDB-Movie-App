@@ -22,7 +22,10 @@ struct MovieDetailsView: View {
                     .scaledToFill()
            
                 VStack {
-                    BottomDetails(movie: $vm.movieDetails , casts: $vm.casts, onMovieItemPressed: { Details in
+                    BottomDetails(movie: $vm.movieDetails , 
+                                  casts: $vm.casts, 
+                                  similarMovie : $vm.similarMovie,
+                                  onMovieItemPressed: { Details in
                         vm.goGenreMovieListPage = true
                         //vm.selectedMovie = Details
                     }, onPressed: { detailsCast in

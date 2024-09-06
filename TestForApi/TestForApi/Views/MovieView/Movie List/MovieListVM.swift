@@ -13,7 +13,7 @@ class MovieListVM: ObservableObject {
     let apiManager = ApiManager()
 
     @Published var goMovieDetailsPage: Bool = false
-    @Published var selectedMovie: MovieApiModel?
+    @Published var selectedMovie: Int?
 
     @Published var isLoading = false
     @Published var movieDetails: MovieApiModel?

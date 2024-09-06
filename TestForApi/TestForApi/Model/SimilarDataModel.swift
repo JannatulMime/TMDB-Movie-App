@@ -8,14 +8,25 @@
 import Foundation
 
 struct SimilarMovieApiResponseData: Codable {
-    let page: Int
-    let results: [MovieApiModel]
-    let totalPages, totalResults: Int
+    let page: Int?
+    let results: [MovieApiModel]?
+    let totalPages, totalResults: Int?
 
     enum CodingKeys: String, CodingKey {
         case page, results
         case totalPages = "total_pages"
         case totalResults = "total_results"
+    }
+}
+
+extension SimilarMovieApiResponseData {
+    func getCommonItemDataList() -> [CommonItemData] {
+        guard let results = results , results.count > 0 else {return [CommonItemData]()}
+        var dataList = [CommonItemData]()
+        for result in results {
+            dataList.append(result.commonItemData)
+        }
+        return dataList
     }
 }
 

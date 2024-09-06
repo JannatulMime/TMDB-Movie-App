@@ -11,13 +11,14 @@ import Foundation
 class MovieDetailsVM : ObservableObject {
     
     let apiManager = ApiManager()
-  
+   let movieApiService = MovieApiService()
     
     @Published var casts : [Cast] = [Cast]()
     @Published var movieDetails: MovieApiModel?
     @Published var backdropImage: String = ""
     @Published var goGenreMovieListPage : Bool = false
     @Published var goCastDetailsPage : Bool = false
+    @Published var similarMovie : [CommonItemData] = []
     
    // @Published var selectedMovie : MovieApiModel?
     
@@ -30,7 +31,7 @@ class MovieDetailsVM : ObservableObject {
     
     func loadMovieData(movieId : Int) {
         Task {
-            do {
+//            do {
                 let movieDetailsResponse: MovieApiModel = try await apiManager.request(url: "https://api.themoviedb.org/3/movie/\(movieId)")
                 self.movieDetails = movieDetailsResponse
                 if let poster = self.movieDetails?.backdropPath {
@@ -45,11 +46,16 @@ class MovieDetailsVM : ObservableObject {
                         self.casts = movieCasts
                     }
                 }
+            
+            let (similarMovie,_) = await movieApiService.getSimilarMovie(id: movieId)
+            self.similarMovie = similarMovie?.getCommonItemDataList() ?? []
+
+            
                
 
-            } catch {
-                print(error)
-            }
+//            } catch {
+//                print(error)
+//            }
         }
     }
     

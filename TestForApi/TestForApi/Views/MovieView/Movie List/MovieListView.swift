@@ -16,25 +16,25 @@ struct MovieListView: View {
             ScrollView {
                 VStack(spacing: 5) {
                     SingleTopRatedMovieListItem(movies: vm.topRatedMovies, onMovieItemPressed: { movie in
-                        //vm.selectedMovie = movie
+                        vm.selectedMovie = movie.id
                         vm.goMovieDetailsPage = true
                     })
                         .frame(width:  UIScreen.main.bounds.size.width, height: 300)
                     
 
                     HorizontalMovieListWithTitle(movies: vm.nowPlayingMovies, title: "Now Playing", onMovieItemPressed: { movie in
-                        //vm.selectedMovie = movie
+                        vm.selectedMovie = movie.id
                         vm.goMovieDetailsPage = true
                     })
 
                     VerticalMovieListWithTitle(movies: vm.popularMovies, title: "Popular", onMovieItemPressed: { movie in
-                       // vm.selectedMovie = movie
+                        vm.selectedMovie = movie.id
                         vm.goMovieDetailsPage = true
                         
                     })
 
                     HorizontalMovieListWithTitle(movies: vm.upComingMovies, title: "UPcoming", onMovieItemPressed:  { movie in
-                        //vm.selectedMovie = movie
+                        vm.selectedMovie = movie.id
                         vm.goMovieDetailsPage = true})
 
                         .onAppear {
@@ -42,7 +42,7 @@ struct MovieListView: View {
                         }
                 }
                 .navigationDestination(isPresented: $vm.goMovieDetailsPage) {
-                    MovieDetailsView(movieId: vm.selectedMovie?.id ?? 0)
+                    MovieDetailsView(movieId: vm.selectedMovie ?? 0)
                 }
                 .navigationBarBackButtonHidden(true)
                 

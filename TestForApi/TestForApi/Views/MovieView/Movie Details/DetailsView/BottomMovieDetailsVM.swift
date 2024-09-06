@@ -13,7 +13,9 @@ class BottomMovieDetailsVM : ObservableObject {
   
     @Published var casts : [Cast] = [Cast]()
     @Published var movie: MovieApiModel?
-    @Published var similar = [CommonItemData]()
+ //   @Published var similar = [CommonItemData]()
+    @Published var selectedMovie: Int?
+
 
    
     
@@ -26,17 +28,17 @@ class BottomMovieDetailsVM : ObservableObject {
         
     }
     
-    func setMovie(movieData : MovieApiModel?) {
-        self.movie = movieData
-    }
-    
-    func setCastData(casts : [Cast]){
-        self.casts = casts
-    }
-    
-    func setRecommendData(similarData : [CommonItemData]) {
-        self.similar = similarData
-    }
+//    func setMovie(movieData : MovieApiModel?) {
+//        self.movie = movieData
+//    }
+//    
+//    func setCastData(casts : [Cast]){
+//        self.casts = casts
+//    }
+//    
+//    func setRecommendData(similarData : [CommonItemData]) {
+//        self.similar = similarData
+//    }
     
 //    func similarMovieList() {
 //        Task {

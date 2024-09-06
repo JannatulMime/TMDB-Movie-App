@@ -15,7 +15,8 @@ struct TvSeriesListView: View {
             //  VStack{
             ScrollView {
                 VStack(spacing: 5) {
-                    SingleTopRatedMovieListItem(movies: vm.topRatedSeries, onMovieItemPressed: { _ in
+                    SingleTopRatedMovieListItem(movies: vm.topRatedSeries, onMovieItemPressed: { data in
+                        vm.selectedId = data.id
                         vm.goTvSeriesDetailsPage = true
                     })
                     .frame(width: UIScreen.main.bounds.size.width, height: 300)
@@ -25,15 +26,15 @@ struct TvSeriesListView: View {
                         vm.goTvSeriesDetailsPage = true
                     })
 
-                    VerticalMovieListWithTitle(movies: vm.onTheAirSeries, title: "On The Air", onMovieItemPressed: { _ in
-                        // vm.selectedMovie = movie
+                    VerticalMovieListWithTitle(movies: vm.onTheAirSeries, title: "On The Air", onMovieItemPressed: { data in
+                        vm.selectedId = data.id
                         vm.goTvSeriesDetailsPage = true
                     })
 
-//                   HorizontalMovieListWithTitle(movies: vm.airingTodaySeries, title: "Popular", onMovieItemPressed: { movie in
-//                        vm.selectedMovie = movie
-//                        vm.goTvSeriesDetailsPage = true
-//                    })
+                   HorizontalMovieListWithTitle(movies: vm.airingTodaySeries, title: "Popular", onMovieItemPressed: { data in
+                       vm.selectedId = data.id
+                       vm.goTvSeriesDetailsPage = true
+                    })
 
                     .onAppear {
                         vm.getTvSeriesList()

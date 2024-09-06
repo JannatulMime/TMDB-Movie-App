@@ -47,23 +47,24 @@ class MovieApiService {
     
     
     
+    func getSimilarMovie(id : Int) async -> (SimilarMovieApiResponseData?, ApiError?) {
+
+        //https://api.themoviedb.org/3/tv/{series_id}/credits
+        let url = BaseUrl + version +  "/movie/" + "\(id)/similar"
+        
+    //    let queryDic: [String: String] = ["inspectionId": inspectionId, "areaId": inspectionId]
+        do {
+            let request = try apiHelper.prepareRequest(apiType: ApiType.GET, url: url, needAuth : true)
+            
+            let (data, _) = try await client.callApi(request: request)
+            let resultObj: SimilarMovieApiResponseData? = try ResponseParser().parseResponse(from: data)
+            return (resultObj, nil)
+
+        } catch {
+            return (nil, error as? ApiError)
+        }
+    }
     
-//    func getMovieListByType(listType: MovieListType) async -> (MovieListApiResponse?, ApiError?) {
-//        
-//        let url = listType.itemUrl
-//        
-//        //    let queryDic: [String: String] = ["inspectionId": inspectionId, "areaId": inspectionId]
-//        do {
-//            let request = try apiHelper.prepareRequest(apiType: ApiType.GET, url: url, needAuth : true)
-//            
-//            let (data, _) = try await client.callApi(request: request)
-//            let resultObj: MovieListApiResponse? = try ResponseParser().parseResponse(from: data)
-//            return (resultObj, nil)
-//            
-//        } catch {
-//            return (nil, error as? ApiError)
-//        }
-//    }
     
     
     func searchMovie(searchKeyword: String) async -> (MovieSearchApiDataModel?, ApiError?) {

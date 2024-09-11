@@ -7,6 +7,33 @@
 
 import Foundation
 
+
+struct TvSeriesListApiResponse: Codable {
+   // let dates: Dates?
+    let page: Int?
+    let results: [TvSeriesApiModel]?
+    let totalPages, totalResults: Int?
+
+    enum CodingKeys: String, CodingKey {
+        //case dates
+        case page, results
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
+    }
+}
+
+extension TvSeriesListApiResponse {
+    func getCommonItemDataList() -> [CommonItemData] {
+        guard let results = results , results.count > 0 else {return [CommonItemData]()}
+        var dataList = [CommonItemData]()
+        for result in results {
+            dataList.append(result.commonItemData)
+        }
+        return dataList
+    }
+}
+
+
 struct TvSeriesApiResponseModel: Codable {
     let page: Int?
     let results: [TvSeriesApiModel]?
@@ -52,7 +79,12 @@ struct TvSeriesApiModel: Codable, Identifiable {
         case spokenLanguages = "spoken_languages"
     }
     
-
+   
+    var commonItemData : CommonItemData {
+        return CommonItemData(id: id  , itemType: .series, name: originalName , details: overview , posterPath: posterPath, backdropPath: backdropPath, voteAverage: voteAverage)
+    }
+    
+    
     var ratingText: String {
         let rating = Int(voteAverage ?? 0.0)
         let ratingText = (0..<rating).reduce("") { (acc, _) -> String in

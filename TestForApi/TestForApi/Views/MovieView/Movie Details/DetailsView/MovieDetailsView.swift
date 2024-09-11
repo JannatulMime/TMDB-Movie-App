@@ -18,11 +18,13 @@ struct MovieDetailsView: View {
              
                 RemoteImage(imagePath: vm.backdropImage)
                     .clipShape(Rectangle())
-                    .frame(width: UIScreen.main.bounds.width, height: 320)
+                    .frame(width: UIScreen.main.bounds.width , height: 320)
                     .scaledToFill()
            
                 VStack {
-                    BottomDetails(movie: $vm.movieDetails , 
+                    
+
+                    BottomDetails(movie: $vm.movieDetails ,
                                   casts: $vm.casts, 
                                   similarMovie : $vm.similarMovie,
                                   onMovieItemPressed: { Details in
@@ -31,12 +33,13 @@ struct MovieDetailsView: View {
                     }, onPressed: { detailsCast in
                         vm.goCastDetailsPage = true
                     })
-                    
+//
                     .padding(.top,300)
-                    .padding(.horizontal,0)
-                       
+                   .padding(.horizontal,0)
+//                       
                     Spacer()
                 }
+                .frame(width: UIScreen.main.bounds.width)
                 .navigationDestination(isPresented: $vm.goGenreMovieListPage) {
                     GenreMovieList()
                 }
@@ -50,10 +53,11 @@ struct MovieDetailsView: View {
             .background(Color.white)
             .onAppear{
                 vm.loadMovieData(movieId: movieId)
-//                vm.loadTvSeriesData(seriesId: seriesId)
             }
             //.frame(width: UIScreen.main.bounds.width)
         .ignoresSafeArea()
+      //  .navigationTitle("")
+      
          
     }
     

@@ -19,3 +19,15 @@ struct MovieSearchApiDataModel : Codable {
         case totalResults = "total_results"
     }
 }
+
+extension MovieSearchApiDataModel {
+    func getCommonItemDataList() -> [CommonItemData] {
+        guard let results = results , results.count > 0 else {return [CommonItemData]()}
+        var dataList = [CommonItemData]()
+        for result in results {
+            dataList.append(result.commonItemData)
+        }
+        return dataList
+    }
+}
+

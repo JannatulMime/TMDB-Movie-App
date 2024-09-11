@@ -16,7 +16,7 @@ class TvSeriesListVM: ObservableObject {
     @Published var selectedId : Int?
     
     @Published var isLoading = false
-    @Published var tvSeriesDetails: MovieApiModel?
+    @Published var tvSeriesDetails: TvSeriesApiModel?
     
     @Published var airingTodaySeries = [CommonItemData]()
     @Published var onTheAirSeries = [CommonItemData]()

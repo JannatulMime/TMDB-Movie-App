@@ -8,22 +8,21 @@
 import SwiftUI
 
 struct SeriesBottomDetails: View {
-    // @StateObject var vm : BottomMovieDetailsVM = BottomMovieDetailsVM()
-   
+    
+    @StateObject var vm = SeriesBottomDetailsVM()
+
+  
     @State var isViewed = false
+    
     @Binding var tvSeries : TvSeriesApiModel?
-   
     @Binding var casts: [Cast]
-   // @Binding var movie : MovieApiModel?
+    @Binding var similarTvSeries : [CommonItemData]
 
     var seriesId = 1022789
     var onSeriesItemPressed : (Genre) -> Void
     var onPressed : (Cast) -> Void
 
-//    init(movie : MovieApiModel?, casts : [Cast]){
-//        _vm = StateObject(wrappedValue: BottomMovieDetailsVM(movieData: movie, casts: casts))
-//    }
-//
+
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
@@ -33,7 +32,9 @@ struct SeriesBottomDetails: View {
                 tvDateTimeAndLanguage
                 description
 
-//                castView
+                castView
+                
+                similarView
                     .padding(.bottom, 100)
 
                 Spacer()
@@ -55,7 +56,7 @@ struct SeriesBottomDetails: View {
     }
 }
 #Preview {
-    SeriesBottomDetails (tvSeries: .constant( DummyTvSeries.dummyTvSeries1), casts: .constant(DummyCastData.castList), onSeriesItemPressed: { _ in }, onPressed: { _ in })
+    SeriesBottomDetails (tvSeries: .constant( DummyTvSeries.dummyTvSeries1), casts: .constant(DummyCastData.castList), similarTvSeries: .constant([]), onSeriesItemPressed: { _ in }, onPressed: { _ in })
    
 }
 
@@ -163,7 +164,7 @@ extension SeriesBottomDetails  {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Text("Cast")
-                    .font(.title3)
+                    .font(.title)
                     .fontWeight(.bold)
                 Spacer()
             }
@@ -183,8 +184,25 @@ extension SeriesBottomDetails  {
             }
         }
         .onAppear {
-            // $vm.loadData(movieId: movieId)
+           // $vm.loadData(movieId: movieId)
         }
+    }
+}
+
+
+extension SeriesBottomDetails {
+    var similarView: some View {
+        
+        HorizontalMovieListWithTitle(movies: similarTvSeries, title: "Recommend", onMovieItemPressed: { series in
+            vm.selectedSeries = series.id
+            vm.goTvSeriesDetailsPage = true
+        })
+        .navigationDestination(isPresented: $vm.goTvSeriesDetailsPage) {
+            MovieDetailsView(movieId: vm.selectedSeries ?? 0)
+        }
+       // .navigationBarBackButtonHidden(true)
+        
+
     }
 }
 

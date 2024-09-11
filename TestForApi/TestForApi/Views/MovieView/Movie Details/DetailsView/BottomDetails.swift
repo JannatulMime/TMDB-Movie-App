@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct BottomDetails: View {
-    // @StateObject var vm : BottomMovieDetailsVM = BottomMovieDetailsVM()
-   
+    
     @StateObject var vm = BottomMovieDetailsVM()
 
     @State var isViewed = false
@@ -38,14 +37,14 @@ struct BottomDetails: View {
                   
                 
                 similarView
-                // .padding(.bottom, 100)
+                 .padding(.bottom, 100)
                 Spacer()
             }
         }
         .padding()
         .background(.white)
         .cornerRadius(20)
-        .ignoresSafeArea()
+        //.ignoresSafeArea()
     }
 
     func getCastProfileImage(imageName: String?) -> String {
@@ -100,28 +99,35 @@ extension BottomDetails {
   
     var textOnCapsule: some View {
         
-        HStack {
-            if let genras = movie?.genres {
-              
-                HStack(spacing: 10) {
-                    ForEach(genras) { genra in
-                        Capsule()
-                            .fill(Color.blueis)
-                            .frame(width: 70, height: 27)
-                            .overlay(
-                                Text(genra.name ?? "")
-                            )
-                            .onTapGesture {
-                               onMovieItemPressed(genra)
-                            }
+        ScrollView(.horizontal) {
+            HStack {
+                if let genras = movie?.genres {
+                  
+                    HStack(spacing: 10) {
+                        ForEach(genras) { genra in
+                            
+                            Text(genra.name ?? "")
+                               // .frame(height: 70)
+                                .padding(10)
+                                .overlay(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
+                                .onTapGesture {
+                                   onMovieItemPressed(genra)
+                                }
+                            
+                            
+                          
+                               
+                        }
                     }
                 }
-            }
 
-            Spacer()
+                Spacer()
+            }
+            .font(.caption)
+            .foregroundStyle(.blue)
         }
-        .font(.caption)
-        .foregroundStyle(.blue)
+        
+      
     }
 }
 
@@ -167,10 +173,14 @@ extension BottomDetails {
                 .foregroundStyle(.gray)
                 .multilineTextAlignment(.leading)
                 .lineLimit(isViewed ? 20 : 3)
+            
+            
             Button(isViewed ? "Read Less" : "Read More") {
-                isViewed.toggle()
+               
+                    isViewed.toggle()
             }
             .font(.system(size: 15, weight: .semibold))
+            
         }
         .font(.system(size: 15))
         // .background(.pink)
@@ -183,7 +193,7 @@ extension BottomDetails {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Text("Cast")
-                    .font(.title3)
+                    .font(.title)
                     .fontWeight(.bold)
                 Spacer()
             }
@@ -213,8 +223,13 @@ extension BottomDetails {
         
         HorizontalMovieListWithTitle(movies: similarMovie, title: "Recommend", onMovieItemPressed: { movie in
             vm.selectedMovie = movie.id
-            //vm.goMovieDetailsPage = true
+            vm.goMovieDetailsPage = true
         })
+        .navigationDestination(isPresented: $vm.goMovieDetailsPage) {
+            MovieDetailsView(movieId: vm.selectedMovie ?? 0)
+        }
+        // .navigationBarBackButtonHidden(true)
+        
 
     }
 }

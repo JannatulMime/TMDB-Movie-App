@@ -9,20 +9,26 @@ import Foundation
 
 class SearchVM : ObservableObject {
     
-    private let apiManager = ApiManager()
-    @Published var movieList: [MovieApiModel] = [MovieApiModel]()
+    // private let apiManager = ApiManager()
+    @Published var movieList: [CommonItemData] = [CommonItemData]()
     @Published var searchText = ""
     let movieApiService = MovieApiService()
-    
-//    init(){
-//
-//    }
+    let tvSeriesApiService = TvSeriesApiService()
+
+    @Published var selectedSearchType : ItemTypes = .Movie
     
     @MainActor func getSearchData() {
         Task {
-            let (data, error) = await movieApiService.searchMovie(searchKeyword: searchText)
-          //  let movieSearchResponse: MovieSearchApiDataModel = try await apiManager.request(url: "https://api.themoviedb.org/3/search/movie", searchQuery: searchText)
-            movieList = data?.results ?? [MovieApiModel]()
+            
+            if selectedSearchType == .Movie {
+                let (data, error) = await movieApiService.searchMovie(searchKeyword: searchText)
+                movieList = data?.getCommonItemDataList() ?? [CommonItemData]()
+            }else{
+                // Tv Series
+                let (data, error) = await tvSeriesApiService.searchTvSeries(searchKeyword: searchText)
+                movieList = data?.getCommonItemDataList() ?? [CommonItemData]()
+            }
+            
         }
     }
     

@@ -28,7 +28,7 @@ class TvSeriesApiService {
     
     init() {}
  
-    func getTvSeriesListByType(listType: TvSeriesListType) async -> (MovieListApiResponse?, ApiError?) {
+    func getTvSeriesListByType(listType: TvSeriesListType) async -> (TvSeriesListApiResponse?, ApiError?) {
 
         let url = listType.itemUrl
         
@@ -37,7 +37,7 @@ class TvSeriesApiService {
             let request = try apiHelper.prepareRequest(apiType: ApiType.GET, url: url, needAuth : true)
             
             let (data, _) = try await client.callApi(request: request)
-            let resultObj: MovieListApiResponse? = try ResponseParser().parseResponse(from: data)
+            let resultObj: TvSeriesListApiResponse? = try ResponseParser().parseResponse(from: data)
             return (resultObj, nil)
 
         } catch {
@@ -99,9 +99,9 @@ class TvSeriesApiService {
     }
     
     
-    func searchMovie(searchKeyword: String) async -> (MovieSearchApiDataModel?, ApiError?) {
+    func searchTvSeries(searchKeyword: String) async -> (TvSeriesListApiResponse?, ApiError?) {
 
-        let url = BaseUrl + version + "/search/movie"
+        let url = BaseUrl + version + "/search/tv"
         
         let queryDic: [String: String] = ["query": searchKeyword]
         do {
@@ -111,7 +111,7 @@ class TvSeriesApiService {
                                                        needAuth : true)
             
             let (data, _) = try await client.callApi(request: request)
-            let resultObj: MovieSearchApiDataModel? = try ResponseParser().parseResponse(from: data)
+            let resultObj: TvSeriesListApiResponse? = try ResponseParser().parseResponse(from: data)
             return (resultObj, nil)
 
         } catch {

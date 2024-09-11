@@ -39,7 +39,7 @@ struct VerticalMovieListWithTitle: View {
                 
                 
             }
-        }.padding(.horizontal)
+        }//.padding(.horizontal)
         
     }
 }

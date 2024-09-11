@@ -52,7 +52,6 @@ class MovieApiService {
         //https://api.themoviedb.org/3/tv/{series_id}/credits
         let url = BaseUrl + version +  "/movie/" + "\(id)/similar"
         
-    //    let queryDic: [String: String] = ["inspectionId": inspectionId, "areaId": inspectionId]
         do {
             let request = try apiHelper.prepareRequest(apiType: ApiType.GET, url: url, needAuth : true)
             

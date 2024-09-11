@@ -26,11 +26,7 @@ struct RemoteImage: View {
                     .clipped()
             }
         }
-//        Image("sky")
-//            .resizable()
-//        .aspectRatio(contentMode: .fill)
-//        .ignoresSafeArea()
-       // .clipped()
+
         
     }
 }

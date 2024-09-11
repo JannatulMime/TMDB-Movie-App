@@ -21,7 +21,9 @@ struct TvSeriesDetailsView: View {
                 .scaledToFill()
        
             VStack {
-                SeriesBottomDetails(tvSeries: $vm.tvSeriesDetails, casts: $vm.casts, onSeriesItemPressed: { Details in
+                SeriesBottomDetails(tvSeries: $vm.tvSeriesDetails, 
+                            casts: $vm.casts,
+                            similarTvSeries: $vm.similarTvSeries, onSeriesItemPressed: { Details in
                     vm.goGenreSeriesListPage = true
                 }, onPressed: { detailsCast in
                     vm.goCastDetailsPage = true

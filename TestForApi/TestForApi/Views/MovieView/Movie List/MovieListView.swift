@@ -21,30 +21,32 @@ struct MovieListView: View {
                     })
                         .frame(width:  UIScreen.main.bounds.size.width, height: 300)
                     
-
-                    HorizontalMovieListWithTitle(movies: vm.nowPlayingMovies, title: "Now Playing", onMovieItemPressed: { movie in
-                        vm.selectedMovie = movie.id
-                        vm.goMovieDetailsPage = true
-                    })
-
-                    VerticalMovieListWithTitle(movies: vm.popularMovies, title: "Popular", onMovieItemPressed: { movie in
-                        vm.selectedMovie = movie.id
-                        vm.goMovieDetailsPage = true
+                    VStack {
                         
-                    })
-
-                    HorizontalMovieListWithTitle(movies: vm.upComingMovies, title: "UPcoming", onMovieItemPressed:  { movie in
-                        vm.selectedMovie = movie.id
-                        vm.goMovieDetailsPage = true})
-
-                        .onAppear {
-                            vm.getMovieList()
-                        }
+                        HorizontalMovieListWithTitle(movies: vm.nowPlayingMovies, title: "Now Playing", onMovieItemPressed: { movie in
+                            vm.selectedMovie = movie.id
+                            vm.goMovieDetailsPage = true
+                        })
+                        
+                        VerticalMovieListWithTitle(movies: vm.popularMovies, title: "Popular", onMovieItemPressed: { movie in
+                            vm.selectedMovie = movie.id
+                            vm.goMovieDetailsPage = true
+                            
+                        })
+                        
+                        HorizontalMovieListWithTitle(movies: vm.upComingMovies, title: "UPcoming", onMovieItemPressed:  { movie in
+                            vm.selectedMovie = movie.id
+                            vm.goMovieDetailsPage = true})
+                    }.padding()
+                       
+                }
+                .onAppear {
+                    vm.getMovieList()
                 }
                 .navigationDestination(isPresented: $vm.goMovieDetailsPage) {
                     MovieDetailsView(movieId: vm.selectedMovie ?? 0)
                 }
-                .navigationBarBackButtonHidden(true)
+                //.navigationBarBackButtonHidden(true)
                 
             }
             .padding(.bottom,100)
@@ -53,9 +55,11 @@ struct MovieListView: View {
             if vm.isLoading {
                 LoadingView()
             }
+                
             
                
         }.ignoresSafeArea()
+          
            
     }
 }

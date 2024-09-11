@@ -42,7 +42,8 @@ struct HorizontalMovieListSingleItem: View {
                 
             }
         }
-        .frame(width: 150)
+        .frame(width: 130)
+       // .background(Color.red)
         
     }
 }

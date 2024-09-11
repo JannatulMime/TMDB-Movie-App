@@ -20,10 +20,10 @@ struct HorizontalMovieListWithTitle: View {
             Text(title)
                 .font(.title)
                 .fontWeight(.bold)
-                .padding(.horizontal)
+               // .padding(.horizontal)
             
             ScrollView(.horizontal, showsIndicators: false) {
-               HStack(spacing: 2) {
+                HStack(spacing: 20) {
                     ForEach(movies) { item in
                             HorizontalMovieListSingleItem(movie: item)
                             .onTapGesture {
@@ -34,7 +34,7 @@ struct HorizontalMovieListWithTitle: View {
                         
                         
                     }
-               }.padding(.horizontal, 5)
+               }//.padding(.horizontal, 5)
                
             }
         }

@@ -23,7 +23,7 @@ struct SearchListView: View {
             Text(name)
                 .font(.headline)
                 .fontWeight(.bold)
-                .foregroundStyle(.orange)
+                .foregroundStyle(.white)
                 .padding()
                 .multilineTextAlignment(.leading)
             

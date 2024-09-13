@@ -13,7 +13,7 @@ struct TvSeriesListView: View {
     var body: some View {
         ZStack {
             //  VStack{
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack(spacing: 5) {
                     SingleTopRatedMovieListItem(movies: vm.topRatedSeries, onMovieItemPressed: { data in
                         vm.selectedId = data.id
@@ -60,6 +60,7 @@ struct TvSeriesListView: View {
             }
 
         }.ignoresSafeArea()
+            .background(.black)
     }
 }
 

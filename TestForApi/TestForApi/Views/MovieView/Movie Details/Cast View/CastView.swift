@@ -28,6 +28,7 @@ struct CastView: View {
             
             Text(name)
                 .font(.caption2)
+                .foregroundStyle(.white)
                 .padding(.horizontal)
                 .lineLimit(1)
               

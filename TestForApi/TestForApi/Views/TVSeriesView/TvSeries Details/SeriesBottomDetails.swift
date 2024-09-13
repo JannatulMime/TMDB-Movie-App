@@ -24,7 +24,7 @@ struct SeriesBottomDetails: View {
 
 
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(spacing: 10) {
                 tvSeriesTitleWithBookMark
                 seriesRatingAndScoreText
@@ -41,7 +41,7 @@ struct SeriesBottomDetails: View {
             }
         }
         .padding()
-        .background(.white)
+        .background(.black)
         .cornerRadius(20)
         .ignoresSafeArea()
     }
@@ -74,6 +74,7 @@ extension SeriesBottomDetails {
             Image(systemName: "bookmark")
                 .resizable()
                 .frame(width: 20, height: 25)
+                .foregroundStyle(.white)
         }
     }
 }
@@ -83,10 +84,12 @@ extension SeriesBottomDetails  {
         HStack {
             Text(tvSeries?.ratingText ?? "No Rating").foregroundColor(.yellow)
             Text(tvSeries?.scoreText ?? "0")
+                .foregroundStyle(.white)
             
 //            if let imdbId = tvSeries?.imdbID {
 //                ImdbButton(imdbId: .constant(imdbId))
 //            }
+            
             Spacer()
         }
     }
@@ -114,12 +117,14 @@ extension SeriesBottomDetails  {
                 Text("Release Date")
                     .foregroundStyle(.gray)
                 Text(tvSeries?.firstAirDate ?? "No Data")
+                    .foregroundStyle(.white)
             }
 
             VStack(alignment: .center) {
                 Text("Length")
                     .foregroundStyle(.gray)
                 Text(tvSeries?.durationText ?? "120 Min")
+                    .foregroundStyle(.white)
             }
 
             VStack(alignment: .center) {
@@ -127,6 +132,7 @@ extension SeriesBottomDetails  {
                     .foregroundStyle(.gray)
 
                 Text(tvSeries?.originalLanguage ?? "NoData")
+                    .foregroundStyle(.white)
             }
 
             Spacer()
@@ -141,6 +147,7 @@ extension SeriesBottomDetails  {
                 Text("Description")
                     .font(.title)
                     .fontWeight(.bold)
+                    .foregroundStyle(.white)
 
                 Spacer()
             }
@@ -166,10 +173,12 @@ extension SeriesBottomDetails  {
                 Text("Cast")
                     .font(.title)
                     .fontWeight(.bold)
+                    .foregroundStyle(.white)
+                
                 Spacer()
             }
 
-            ScrollView(.horizontal) {
+            ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(casts) { cast in
 

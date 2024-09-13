@@ -34,7 +34,7 @@ struct MovieListView: View {
                             
                         })
                         
-                        HorizontalMovieListWithTitle(movies: vm.upComingMovies, title: "UPcoming", onMovieItemPressed:  { movie in
+                        HorizontalMovieListWithTitle(movies: vm.upComingMovies, title: "UpComing", onMovieItemPressed:  { movie in
                             vm.selectedMovie = movie.id
                             vm.goMovieDetailsPage = true})
                     }.padding()
@@ -59,6 +59,7 @@ struct MovieListView: View {
             
                
         }.ignoresSafeArea()
+         .background(.black)
           
            
     }

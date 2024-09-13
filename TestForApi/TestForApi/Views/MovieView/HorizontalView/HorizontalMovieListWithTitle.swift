@@ -20,6 +20,7 @@ struct HorizontalMovieListWithTitle: View {
             Text(title)
                 .font(.title)
                 .fontWeight(.bold)
+                .foregroundStyle(.white)
                // .padding(.horizontal)
             
             ScrollView(.horizontal, showsIndicators: false) {
@@ -37,7 +38,7 @@ struct HorizontalMovieListWithTitle: View {
                }//.padding(.horizontal, 5)
                
             }
-        }
+        }//.background(.black)
     }
 }
 

@@ -35,8 +35,11 @@ struct MovieSearchView: View {
                     }
                 }
             }
-        }.background(Color.white)
-        .padding(.bottom,50)
+        }
+      
+        .background(.black)
+        //.padding(.bottom,30)
+        
         
     
         .onChange(of: vm.searchText) { _, _ in

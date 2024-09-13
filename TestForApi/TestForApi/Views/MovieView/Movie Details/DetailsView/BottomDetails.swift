@@ -25,7 +25,8 @@ struct BottomDetails: View {
 //    }
 //
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
+            
             VStack(spacing: 10) {
                 movieTitleWithBookMark
                 ratingAndScoreText
@@ -37,14 +38,14 @@ struct BottomDetails: View {
                   
                 
                 similarView
-                 .padding(.bottom, 100)
+                .padding(.bottom, 100)
                 Spacer()
             }
         }
         .padding()
-        .background(.white)
+        .background(.black)
         .cornerRadius(20)
-        //.ignoresSafeArea()
+        .ignoresSafeArea()
     }
 
     func getCastProfileImage(imageName: String?) -> String {
@@ -66,9 +67,9 @@ extension BottomDetails {
     var movieTitleWithBookMark: some View {
         HStack {
             Text(movie?.title ?? "noData")
-                .font(.largeTitle)
+                .font(.title)
                 .fontWeight(.bold)
-                .foregroundStyle(.pink)
+                .foregroundStyle(.purple)
                 .lineLimit(2)
 
             Spacer()
@@ -76,6 +77,7 @@ extension BottomDetails {
             Image(systemName: "bookmark")
                 .resizable()
                 .frame(width: 20, height: 25)
+                .foregroundStyle(.yellow)
         }
     }
 }
@@ -85,6 +87,7 @@ extension BottomDetails {
         HStack {
             Text(movie?.ratingText ?? "No Rating").foregroundColor(.yellow)
             Text(movie?.scoreText ?? "0")
+                .foregroundStyle(.white)
 
             if let imdbId = movie?.imdbID {
                 ImdbButton(imdbId: .constant(imdbId))
@@ -99,32 +102,35 @@ extension BottomDetails {
   
     var textOnCapsule: some View {
         
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 if let genras = movie?.genres {
                   
                     HStack(spacing: 10) {
+                        
                         ForEach(genras) { genra in
                             
-                            Text(genra.name ?? "")
-                               // .frame(height: 70)
-                                .padding(10)
-                                .overlay(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
+//                            Text(genra.name ?? "")
+//                               // .frame(height: 70)
+//                                .padding(10)
+//                                .background(.blueis)
+//                                .clipShape(RoundedRectangle(cornerRadius: 15))
+//                            
+                            
+                           TextInCapsuleBG(text: genra.name ?? "")
+                            
                                 .onTapGesture {
                                    onMovieItemPressed(genra)
                                 }
-                            
-                            
-                          
-                               
+
                         }
                     }
                 }
 
-                Spacer()
+               // Spacer()
             }
-            .font(.caption)
-            .foregroundStyle(.blue)
+           // .font(.caption)
+            //.foregroundStyle(.blue)
         }
         
       
@@ -138,12 +144,14 @@ extension BottomDetails {
                 Text("Release Date")
                     .foregroundStyle(.gray)
                 Text(movie?.releaseDate ?? "No Data")
+                    .foregroundStyle(.white)
             }
 
             VStack(alignment: .center) {
                 Text("Length")
                     .foregroundStyle(.gray)
                 Text(movie?.durationText ?? "120 Min")
+                    .foregroundStyle(.white)
             }
 
             VStack(alignment: .center) {
@@ -151,6 +159,7 @@ extension BottomDetails {
                     .foregroundStyle(.gray)
 
                 Text(movie?.originalLanguage ?? "NoData")
+                    .foregroundStyle(.white)
             }
 
             Spacer()
@@ -165,6 +174,7 @@ extension BottomDetails {
                 Text("Description")
                     .font(.title)
                     .fontWeight(.bold)
+                    .foregroundStyle(.white)
 
                 Spacer()
             }
@@ -195,10 +205,12 @@ extension BottomDetails {
                 Text("Cast")
                     .font(.title)
                     .fontWeight(.bold)
+                    .foregroundStyle(.white)
+
                 Spacer()
             }
 
-            ScrollView(.horizontal) {
+            ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(casts) { cast in
 

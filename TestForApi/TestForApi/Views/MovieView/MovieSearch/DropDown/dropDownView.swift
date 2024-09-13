@@ -21,6 +21,7 @@ struct dropDownView: View {
             Picker("Select", selection: $selection) {
                 ForEach(ItemTypes.allCases, id: \.self) { option in
                     Text(option.rawValue)
+                    
                        
                 }
             }

@@ -28,7 +28,7 @@ struct VerticalMovieListSingleItem: View {
                     .fontWeight(.bold)
                     .lineLimit(2)
                     .lineSpacing(0.0)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.white)
                     .multilineTextAlignment(.leading)
             
                 HStack(spacing: 3) {
@@ -40,7 +40,7 @@ struct VerticalMovieListSingleItem: View {
                     
                     Text(movie.scoreText)
                         .font(.caption)
-                        .foregroundStyle(.pink)
+                        .foregroundStyle(.white)
                     
                   //  ImdbButton()
                 }

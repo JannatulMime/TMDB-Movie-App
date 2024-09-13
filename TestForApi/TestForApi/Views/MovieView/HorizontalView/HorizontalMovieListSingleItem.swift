@@ -24,7 +24,7 @@ struct HorizontalMovieListSingleItem: View {
                 .font(.caption)
                 .fontWeight(.bold)
                 .lineLimit(1)
-                .foregroundStyle(.black)
+                .foregroundStyle(.white)
                 
             
             HStack(spacing: 3) {
@@ -36,14 +36,14 @@ struct HorizontalMovieListSingleItem: View {
                 
                 Text(movie.scoreText)
                     .font(.caption)
-                    .foregroundStyle(.pink)
+                    .foregroundStyle(.white)
                 
                // ImdbButton()
                 
             }
         }
         .frame(width: 130)
-       // .background(Color.red)
+       // .background(Color.black)
         
     }
 }

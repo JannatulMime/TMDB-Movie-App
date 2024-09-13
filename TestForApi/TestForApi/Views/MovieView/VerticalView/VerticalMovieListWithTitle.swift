@@ -19,6 +19,7 @@ struct VerticalMovieListWithTitle: View {
             Text(title)
                 .font(.title)
                 .fontWeight(.bold)
+                .foregroundStyle(.white)
                
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 15) {
@@ -40,6 +41,7 @@ struct VerticalMovieListWithTitle: View {
                 
             }
         }//.padding(.horizontal)
+       // .background(.black)
         
     }
 }

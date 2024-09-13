@@ -53,6 +53,7 @@ struct TvSeriesApiModel: Codable, Identifiable {
     var genres: [Genre]?
     var genreIDS: [Int]?
     var id: Int?
+    var imdbID: String?
     var originCountry: [String]?
     var originalLanguage, originalName, overview: String?
     var popularity: Double?
@@ -67,6 +68,7 @@ struct TvSeriesApiModel: Codable, Identifiable {
         case genres = "genres"
         case genreIDS = "genre_ids"
         case id
+        case imdbID = "imdb_id"
         case originCountry = "origin_country"
         case originalLanguage = "original_language"
         case originalName = "original_name"

@@ -50,12 +50,14 @@ struct MovieDetailsView: View {
                 
                 
             }
-            .background(Color.white)
+            //.ignoresSafeArea()
+            .background(Color.black)
             .onAppear{
                 vm.loadMovieData(movieId: movieId)
             }
-            //.frame(width: UIScreen.main.bounds.width)
-        .ignoresSafeArea()
+        //.frame(width: UIScreen.main.bounds.width)
+            .ignoresSafeArea()
+       
       //  .navigationTitle("")
       
          

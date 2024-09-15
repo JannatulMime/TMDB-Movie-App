@@ -99,7 +99,7 @@ class TvSeriesApiService {
     }
     
     
-    func searchTvSeries(searchKeyword: String) async -> (TvSeriesListApiResponse?, ApiError?) {
+    func searchTvSeries(searchKeyword: String) async -> (TvSeriesSearchApiDataModel?, ApiError?) {
 
         let url = BaseUrl + version + "/search/tv"
         
@@ -111,7 +111,7 @@ class TvSeriesApiService {
                                                        needAuth : true)
             
             let (data, _) = try await client.callApi(request: request)
-            let resultObj: TvSeriesListApiResponse? = try ResponseParser().parseResponse(from: data)
+            let resultObj: TvSeriesSearchApiDataModel? = try ResponseParser().parseResponse(from: data)
             return (resultObj, nil)
 
         } catch {

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MovieSearchView: View {
     @StateObject var vm = SearchVM()
+    @State var isMoviePressed : Bool = false
+    @State var isSeriesPressed : Bool = false
 
     var body: some View {
         
@@ -29,18 +31,21 @@ struct MovieSearchView: View {
 
                         let imagePath = Utility.getWebImagePath(imageName: item.posterPath ?? "")
 
-                        NavigationLink(destination: MovieDetailsView(movieId: item.id ?? 0)) {
-                            SearchListView(name: item.name ?? "noData", posterPath: imagePath)
-                        }
+                        SingleSearchListItemView(name: item.name ?? "noData", posterPath: imagePath)
+                                .onTapGesture {
+                                    vm.selectedMovieId = item.id ?? 0
+                                    if vm.selectedSearchType == .Movie {
+                                        isMoviePressed = true
+                                    }else{
+                                        isSeriesPressed = true
+                                    }
+                                }
                     }
                 }
             }
         }
       
         .background(.black)
-        //.padding(.bottom,30)
-        
-        
     
         .onChange(of: vm.searchText) { _, _ in
             vm.getSearchData()
@@ -49,6 +54,13 @@ struct MovieSearchView: View {
             if prevTypes != newTypes {
                 vm.getSearchData()
             }
+        }
+        
+        .navigationDestination(isPresented: $isMoviePressed) {
+            MovieDetailsView(movieId: vm.selectedMovieId)
+        }
+        .navigationDestination(isPresented: $isSeriesPressed) {
+               TvSeriesDetailsView(seriesId: vm.selectedMovieId )
         }
     }
 }

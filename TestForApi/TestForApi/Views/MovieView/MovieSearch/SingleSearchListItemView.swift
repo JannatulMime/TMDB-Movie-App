@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct SearchListView: View {
+struct SingleSearchListItemView: View {
     let name: String
     let posterPath : String
     
@@ -33,5 +33,5 @@ struct SearchListView: View {
 }
 
 #Preview {
-    SearchListView(name: "Furious", posterPath: "https://image.tmdb.org/t/p/original//iADOJ8Zymht2JPMoy3R7xceZprc.jpg")
+    SingleSearchListItemView(name: "Furious", posterPath: "https://image.tmdb.org/t/p/original//iADOJ8Zymht2JPMoy3R7xceZprc.jpg")
 }

@@ -1,5 +1,5 @@
 //
-//  SearchDataModel.swift
+//  MovieSearchApiDataModel.swift
 //  TestForApi
 //
 //  Created by Habibur Rahman on 12/7/24.

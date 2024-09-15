@@ -35,14 +35,14 @@ struct SeriesBottomDetails: View {
                 castView
                 
                 similarView
-                    .padding(.bottom, 100)
+                    .padding(.bottom, 50)
 
                 Spacer()
             }
         }
         .padding()
         .background(.black)
-        .cornerRadius(20)
+        .cornerRadius(30)
         .ignoresSafeArea()
     }
 
@@ -106,7 +106,7 @@ extension SeriesBottomDetails  {
             Spacer()
         }
       
-        .foregroundStyle(.blue)
+       // .foregroundStyle(.blue)
     }
 }
 
@@ -209,7 +209,7 @@ extension SeriesBottomDetails {
         .navigationDestination(isPresented: $vm.goTvSeriesDetailsPage) {
             MovieDetailsView(movieId: vm.selectedSeries ?? 0)
         }
-       // .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true)
         
 
     }

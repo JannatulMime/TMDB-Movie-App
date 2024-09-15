@@ -50,7 +50,7 @@ struct TvSeriesListView: View {
                     // MovieDetailsView(seriesId: vm.selectedMovie?.id ?? 0)
                     TvSeriesDetailsView(seriesId: vm.selectedId ?? 0)
                 }
-               // .navigationBarBackButtonHidden(true)
+                .navigationBarBackButtonHidden(true)
             }
             .padding(.bottom, 100)
             //   }

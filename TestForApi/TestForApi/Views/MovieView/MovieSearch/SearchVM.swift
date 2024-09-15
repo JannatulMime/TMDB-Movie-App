@@ -12,8 +12,10 @@ class SearchVM : ObservableObject {
     // private let apiManager = ApiManager()
     @Published var movieList: [CommonItemData] = [CommonItemData]()
     @Published var searchText = ""
+    @Published var selectedMovieId : Int = 0
     let movieApiService = MovieApiService()
     let tvSeriesApiService = TvSeriesApiService()
+    
 
     @Published var selectedSearchType : ItemTypes = .Movie
     

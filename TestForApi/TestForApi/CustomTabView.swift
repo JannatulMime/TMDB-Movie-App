@@ -21,7 +21,7 @@ struct CustomTabView: View {
                 }
                 else if self.index == 1 {
                     
-                   // Color.red.edgesIgnoringSafeArea(.top)
+                    //Color.red.edgesIgnoringSafeArea(.top)
                     
                 }
                 else if self.index == 2 {
@@ -65,10 +65,9 @@ struct TabViews : View {
                 self.index = 1
                 
             }) {
-                Image(systemName: "magnifyingglass")
+                Image(systemName: "tv.fill")
             }
             .foregroundStyle(Color.black.opacity(self.index == 1 ? 1 : 0.2))
-            .offset(x: 10)
             Spacer(minLength: 0)
                
             
@@ -102,9 +101,10 @@ struct TabViews : View {
                 self.index = 3
                 
             }) {
-                Image(systemName: "person.fill")
+                Image(systemName: "magnifyingglass")
             }
             .foregroundStyle(Color.black.opacity(self.index == 3 ? 1 : 0.2))
+            .offset(x: 10)
            
             
         }

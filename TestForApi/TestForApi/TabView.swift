@@ -21,7 +21,7 @@ struct ContentView: View {
                              Text("Movie")
                          }
                      }.tag(0)
-                   // .background(.green)
+                  
                 
                 TvSeriesListView()
                      .tabItem {
@@ -40,7 +40,7 @@ struct ContentView: View {
                     }.tag(2)
               
             }.onAppear() {
-                UITabBar.appearance().backgroundColor = .clear
+                UITabBar.appearance().backgroundColor = .black
              
             }.tint(.purple)
            

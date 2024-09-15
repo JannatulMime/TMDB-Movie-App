@@ -38,13 +38,13 @@ struct BottomDetails: View {
                   
                 
                 similarView
-                .padding(.bottom, 100)
+                .padding(.bottom, 50)
                 Spacer()
             }
         }
         .padding()
         .background(.black)
-        .cornerRadius(20)
+        .cornerRadius(30)
         .ignoresSafeArea()
     }
 
@@ -103,34 +103,16 @@ extension BottomDetails {
     var textOnCapsule: some View {
         
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                if let genras = movie?.genres {
-                  
-                    HStack(spacing: 10) {
+                
+                
+                HStack {
+                    if let genras = movie?.genres {
+                        GenraListView(genras: genras)
                         
-                        ForEach(genras) { genra in
-                            
-//                            Text(genra.name ?? "")
-//                               // .frame(height: 70)
-//                                .padding(10)
-//                                .background(.blueis)
-//                                .clipShape(RoundedRectangle(cornerRadius: 15))
-//                            
-                            
-                           TextInCapsuleBG(text: genra.name ?? "")
-                            
-                                .onTapGesture {
-                                   onMovieItemPressed(genra)
-                                }
-
-                        }
                     }
+                    Spacer()
                 }
-
-               // Spacer()
-            }
-           // .font(.caption)
-            //.foregroundStyle(.blue)
+              
         }
         
       
@@ -240,7 +222,7 @@ extension BottomDetails {
         .navigationDestination(isPresented: $vm.goMovieDetailsPage) {
             MovieDetailsView(movieId: vm.selectedMovie ?? 0)
         }
-        // .navigationBarBackButtonHidden(true)
+         .navigationBarBackButtonHidden(true)
         
 
     }

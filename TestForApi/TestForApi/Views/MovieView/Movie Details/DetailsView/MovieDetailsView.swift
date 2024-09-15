@@ -10,16 +10,26 @@ struct MovieDetailsView: View {
     
     @StateObject var vm = MovieDetailsVM()
     var movieId = 1022789
-   
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
        
-            ZStack (alignment : .top) {
+            ZStack (alignment : .topLeading) {
              
+                
                 RemoteImage(imagePath: vm.backdropImage)
                     .clipShape(Rectangle())
                     .frame(width: UIScreen.main.bounds.width , height: 320)
                     .scaledToFill()
+                
+                Button{
+                    self.presentationMode.wrappedValue.dismiss()
+                }label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundStyle(.white)
+                        .padding()
+                }.padding(.top ,50)
+                
            
                 VStack {
                     

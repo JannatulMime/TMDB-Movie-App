@@ -11,14 +11,25 @@ struct TvSeriesDetailsView: View {
     
     var seriesId = 223365
     @StateObject var vm = TvSeriesDetailsVM()
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        ZStack (alignment : .top) {
+        ZStack (alignment : .topLeading) {
          
             RemoteImage(imagePath: vm.backdropImage)
                 .clipShape(Rectangle())
                 .frame(width: UIScreen.main.bounds.width, height: 320)
                 .scaledToFill()
+            
+            
+            Button{
+                self.presentationMode.wrappedValue.dismiss()
+            }label: {
+                Image(systemName: "chevron.left")
+                    .foregroundStyle(.white)
+                    .padding()
+            }.padding(.top ,50)
+            
        
             VStack {
                 SeriesBottomDetails(tvSeries: $vm.tvSeriesDetails, 
@@ -52,7 +63,7 @@ struct TvSeriesDetailsView: View {
                 vm.loadTvSeriesData(seriesId: seriesId)
         }
         //.frame(width: UIScreen.main.bounds.width)
-    .ignoresSafeArea()
+          .ignoresSafeArea()
      
 }
 

@@ -46,8 +46,8 @@ struct MovieListView: View {
                 .navigationDestination(isPresented: $vm.goMovieDetailsPage) {
                     MovieDetailsView(movieId: vm.selectedMovie ?? 0)
                 }
-                //.navigationBarBackButtonHidden(true)
-                
+                .navigationBarBackButtonHidden(true)
+              
             }
             .padding(.bottom,100)
             //   }

@@ -20,8 +20,9 @@ struct RemoteImage: View {
             if let url = URL(string: imagePath) {
                 KFImage(url)
                     .loadDiskFileSynchronously()
-                    .cacheMemoryOnly(false)
-                    .fade(duration: 0.25)
+                    .placeholder { Image("placeholder") }
+               //     .cacheMemoryOnly(false)
+                  //  .fade(duration: 0.25)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .clipped()

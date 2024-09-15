@@ -7,83 +7,123 @@
 import SwiftUI
 
 struct MovieDetailsView: View {
-    
     @StateObject var vm = MovieDetailsVM()
     var movieId = 1022789
+    @State var offset : CGFloat = 0
+    var topEdge : CGFloat = 0
+    var maxHeight : CGFloat = 400
+    var minHeight : CGFloat = 100
+    
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
-       
-            ZStack (alignment : .topLeading) {
-             
-                
-                RemoteImage(imagePath: vm.backdropImage)
-                    .clipShape(Rectangle())
-                    .frame(width: UIScreen.main.bounds.width , height: 320)
-                    .scaledToFill()
-                
-                LinearGradient(
-                    gradient: Gradient(colors: [Color.clear,Color.black.opacity(0.5)]),
-                    startPoint: .bottom,
-                    endPoint: .top
-                ) .frame(width: UIScreen.main.bounds.width , height: 320)
-                
-                Button{
-                    self.presentationMode.wrappedValue.dismiss()
-                }label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundStyle(.white)
-                        .padding()
-                }.padding(.top ,50)
-                
-           
-                VStack {
-                    
-
-                    BottomDetails(movie: $vm.movieDetails ,
-                                  casts: $vm.casts, 
-                                  similarMovie : $vm.similarMovie,
-                                  onMovieItemPressed: { Details in
-                        vm.goGenreMovieListPage = true
-                        //vm.selectedMovie = Details
-                    }, onPressed: { detailsCast in
-                        vm.goCastDetailsPage = true
-                    })
-//
-                    .padding(.top,300)
-                   .padding(.horizontal,0)
-//                       
-                    Spacer()
-                }
-                .frame(width: UIScreen.main.bounds.width)
-                .navigationDestination(isPresented: $vm.goGenreMovieListPage) {
-                    GenreMovieList()
-                }
-                
-                .navigationDestination(isPresented: $vm.goCastDetailsPage) {
-                   //CastDetails()
-                }
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(spacing: 0) {
+                GeometryReader{ proxy in
+                    DetailsTopView(imagePath: $vm.backdropImage, topEdge: topEdge, offset: $offset)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: getHeaderHeight(), alignment : .bottom)
+                     
+                        .overlay(
+                            overlayView
+                              
+                             
+                            .frame(height:120)
+                            .background(Color.black.opacity(topBarTitleOpacity() - 0.2))
+                            .padding(.top,topEdge)
+                         , alignment: .top)
+                }.frame(height: maxHeight)
+                //Fixing at top
+                    .offset(y: -offset)
+                    .zIndex(1)
                 
                 
-            }
-            //.ignoresSafeArea()
+                bottomView
+                    .zIndex(0)
+               
+            }.modifier(OffsetModifier(offset: $offset))
+        }
+        .frame(width: UIScreen.main.bounds.width)
+            .coordinateSpace(.named("SCROLL"))
             .background(Color.black)
-            .onAppear{
+            .navigationDestination(isPresented: $vm.goGenreMovieListPage) {
+                GenreMovieList()
+            }
+
+            .navigationDestination(isPresented: $vm.goCastDetailsPage) {
+                // CastDetails()
+            }
+            .onAppear {
                 vm.loadMovieData(movieId: movieId)
             }
-        //.frame(width: UIScreen.main.bounds.width)
+
             .ignoresSafeArea()
-       
-      //  .navigationTitle("")
-      
-         
     }
     
-
+    func getHeaderHeight() -> CGFloat {
+        
+        let topHeight = maxHeight + offset
+        return topHeight > (minHeight + topEdge) ? topHeight : (minHeight + topEdge)
+    }
+    
+    func topBarTitleOpacity () -> CGFloat {
+        let progress = -(offset + minHeight) / (maxHeight - (minHeight + topEdge))
+   //     let progress = -(offset + 80) / (maxHeight - (80 + topEdge))
+      //  let opacity = 1 - progress
+        return progress//progress
+    }
+    
 }
 
 #Preview {
-    MovieDetailsView()
+    MovieDetailsView(topEdge: 0)
 //        MovieDetailsView(imagePath: "https://image.tmdb.org/t/p/original//gKkl37BQuKTanygYQG1pyYgLVgf.jpg")
 }
 
+extension MovieDetailsView {
+    var overlayView: some View {
+        
+        HStack{
+            
+            Image(systemName: "chevron.left")
+                .foregroundStyle(.white)
+                .padding().onTapGesture {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+                .padding(.top,20)
+            
+            RemoteImage(imagePath: vm.backdropImage)
+                
+                .frame(width: 50,height: 50)
+                .scaledToFill()
+                .clipShape(Circle())
+                .opacity(topBarTitleOpacity())
+                .padding(.top,20)
+
+            
+            Spacer()
+            
+          
+        }
+        
+    }
+
+    var bottomView: some View {
+        VStack {
+            BottomDetails(movie: $vm.movieDetails,
+                          casts: $vm.casts,
+                          similarMovie: $vm.similarMovie,
+                          onMovieItemPressed: { _ in
+                              vm.goGenreMovieListPage = true
+                              // vm.selectedMovie = Details
+                          }, onPressed: { _ in
+                              vm.goCastDetailsPage = true
+                          })
+//
+                          //  .padding(.top,300)
+                          .padding(.horizontal, 0)
+//
+            Spacer()
+        }
+    }
+}

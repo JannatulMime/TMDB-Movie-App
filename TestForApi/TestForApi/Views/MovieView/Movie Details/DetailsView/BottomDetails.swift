@@ -25,22 +25,23 @@ struct BottomDetails: View {
 //    }
 //
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            
-            VStack(spacing: 10) {
-                movieTitleWithBookMark
-                ratingAndScoreText
-                textOnCapsule
-                dateTimeAndLanguage
-                description
+//        ScrollView(showsIndicators: false) {
+//            
+//
+//        }
+        VStack(spacing: 10) {
+            movieTitleWithBookMark
+            ratingAndScoreText
+            textOnCapsule
+            dateTimeAndLanguage
+            description
 
-                castView
-                  
-                
-                similarView
-                .padding(.bottom, 50)
-                Spacer()
-            }
+            castView
+              
+            
+            similarView
+            .padding(.bottom, 50)
+            Spacer()
         }
         .padding()
         .background(.black)

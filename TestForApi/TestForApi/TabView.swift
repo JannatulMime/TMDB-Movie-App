@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     
+    init() {
+            UITabBar.appearance().unselectedItemTintColor = UIColor.gray
+        }
+    
     var body: some View {
         
         NavigationStack{
@@ -19,6 +23,7 @@ struct ContentView: View {
                          VStack {
                              Image(systemName: "movieclapper")
                              Text("Movie")
+                            
                          }
                      }.tag(0)
                   
@@ -28,6 +33,7 @@ struct ContentView: View {
                          VStack {
                              Image(systemName: "tv")
                              Text("TV")
+                                 .foregroundStyle(.red)
                          }
                      }.tag(1)
                 
@@ -39,15 +45,9 @@ struct ContentView: View {
                         }
                     }.tag(2)
               
-            }.onAppear() {
-                UITabBar.appearance().backgroundColor = .black
-             
-            }.tint(.purple)
-           
-
+            }
+           .tint(.white)
         }
-        
-        
     }
 }
 

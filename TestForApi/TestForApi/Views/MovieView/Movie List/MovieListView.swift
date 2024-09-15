@@ -54,6 +54,7 @@ struct MovieListView: View {
 
             if vm.isLoading {
                 LoadingView()
+                    .zIndex(2.0)
             }
                 
             

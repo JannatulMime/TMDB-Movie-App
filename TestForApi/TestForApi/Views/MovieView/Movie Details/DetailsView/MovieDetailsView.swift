@@ -22,6 +22,12 @@ struct MovieDetailsView: View {
                     .frame(width: UIScreen.main.bounds.width , height: 320)
                     .scaledToFill()
                 
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.clear,Color.black.opacity(0.5)]),
+                    startPoint: .bottom,
+                    endPoint: .top
+                ) .frame(width: UIScreen.main.bounds.width , height: 320)
+                
                 Button{
                     self.presentationMode.wrappedValue.dismiss()
                 }label: {

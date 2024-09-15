@@ -17,7 +17,7 @@ struct LoadingView: View {
                 .ignoresSafeArea()
             
             ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: .purple))
+                .progressViewStyle(CircularProgressViewStyle(tint: .white))
                 .scaleEffect(2)
             
         }.onAppear{ startLoading() }
@@ -25,9 +25,9 @@ struct LoadingView: View {
     
     func startLoading() {
         isLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            isLoading = false
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            isLoading = false
+//        }
     }
 }
 

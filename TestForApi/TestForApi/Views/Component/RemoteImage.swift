@@ -8,6 +8,10 @@
 import Kingfisher
 import SwiftUI
 
+import Kingfisher
+
+
+
 struct RemoteImage: View {
     let imagePath: String
 
@@ -15,6 +19,9 @@ struct RemoteImage: View {
         ZStack {
             if let url = URL(string: imagePath) {
                 KFImage(url)
+                    .loadDiskFileSynchronously()
+                    .cacheMemoryOnly(false)
+                    .fade(duration: 0.25)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .clipped()

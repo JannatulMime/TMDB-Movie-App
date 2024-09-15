@@ -34,8 +34,7 @@ struct DetailsTopView: View {
     }
     
     func getOpacity() -> CGFloat {
-        
-       
+
         let progress = -offset / 230//70
         let opacity = 1 - progress
         

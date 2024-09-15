@@ -26,8 +26,6 @@ struct MovieDetailsView: View {
                      
                         .overlay(
                             overlayView
-                              
-                             
                             .frame(height:120)
                             .background(Color.black.opacity(topBarTitleOpacity() - 0.2))
                             .padding(.top,topEdge)

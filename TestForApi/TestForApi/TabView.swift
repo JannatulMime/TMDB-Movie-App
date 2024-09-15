@@ -8,45 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
-    
     init() {
-            UITabBar.appearance().unselectedItemTintColor = UIColor.gray
-        }
-    
+        UITabBar.appearance().unselectedItemTintColor = UIColor.gray
+    }
+
     var body: some View {
-        
-        NavigationStack{
+        NavigationStack {
             TabView {
-                
                 MovieListView()
-                     .tabItem {
-                         VStack {
-                             Image(systemName: "movieclapper")
-                             Text("Movie")
-                            
-                         }
-                     }.tag(0)
-                  
-                
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "movieclapper")
+                            Text("Movie")
+                        }
+                    }.tag(0)
+
                 TvSeriesListView()
-                     .tabItem {
-                         VStack {
-                             Image(systemName: "tv")
-                             Text("TV")
-                                 .foregroundStyle(.red)
-                         }
-                     }.tag(1)
-                
-                 MovieSearchView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "tv")
+                            Text("TV")
+                                .foregroundStyle(.red)
+                        }
+                    }.tag(1)
+
+                MovieSearchView()
                     .tabItem {
                         VStack {
                             Image(systemName: "magnifyingglass")
                             Text("Search")
                         }
                     }.tag(2)
-              
             }
-           .tint(.white)
+            .tint(.white)
         }
     }
 }

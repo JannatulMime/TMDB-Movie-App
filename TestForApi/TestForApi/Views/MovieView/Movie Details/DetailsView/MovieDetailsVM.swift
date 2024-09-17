@@ -9,7 +9,16 @@ import Foundation
 
 @MainActor
 class MovieDetailsVM: ObservableObject {
+    
+    @Published var tvSeriesDetails: TvSeriesApiModel?
+    @Published var goGenreSeriesListPage : Bool = false
+   // @Published var goCastDetailsPage : Bool = false
+  //  @Published var similarTvSeries : [CommonItemData] = []
+    
+    
     let apiManager = ApiManager()
+    
+    let seriesApiService = TvSeriesApiService()
     let movieApiService = MovieApiService()
 
     @Published var casts: [Cast] = [Cast]()
@@ -29,9 +38,7 @@ class MovieDetailsVM: ObservableObject {
             let movieDetailsResponse: MovieApiModel = try await apiManager.request(url: "https://api.themoviedb.org/3/movie/\(movieId)")
             self.movieDetails = movieDetailsResponse
             self.backdropImage = Utility.getWebImagePath(imageName: self.movieDetails?.backdropPath ?? "")
-//                if let poster = self.movieDetails?.backdropPath {
-//                    backdropImage = "https://image.tmdb.org/t/p/original\(poster)"
-//                }
+
 
             let creditUrl = "https://api.themoviedb.org/3/movie/\(movieId)/credits"
             let creditResponseModel: MovieCreditApiResponseModel = try await apiManager.request(url: creditUrl)
@@ -44,6 +51,31 @@ class MovieDetailsVM: ObservableObject {
 
             let (similarMovie, _) = await movieApiService.getSimilarMovie(id: movieId)
             self.similarMovie = similarMovie?.getCommonItemDataList() ?? []
+        }
+    }
+    
+    
+    func loadTvSeriesData(seriesId : Int) {
+        Task {
+           
+            let (seriesDetails,_) = await seriesApiService.getSeriesDetailsBy(id: seriesId)
+            self.tvSeriesDetails = seriesDetails
+
+            backdropImage = Utility.getWebImagePath(imageName: self.tvSeriesDetails?.backdropPath ?? "" )
+            
+            let (creditdata,_) = await seriesApiService.getSeriesCreditsBy(id: seriesId)
+            self.tvSeriesDetails = seriesDetails
+
+            DispatchQueue.main.async {
+                if let casts = creditdata?.cast {
+                    self.casts = casts
+                }
+            }
+            
+            let (similarTvSeries,_) = await seriesApiService.getSimilarTvSeries(id: seriesId)
+            self.similarMovie = similarTvSeries?.getCommonItemDataList() ?? []
+
+            
         }
     }
 }

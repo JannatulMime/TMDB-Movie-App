@@ -12,7 +12,7 @@ struct MovieListView: View {
 
     var body: some View {
         ZStack {
-            //  VStack{
+           
             ScrollView {
                 VStack(spacing: 5) {
                     SingleTopRatedMovieListItem(movies: vm.topRatedMovies, onMovieItemPressed: { movie in
@@ -50,7 +50,6 @@ struct MovieListView: View {
               
             }
             .padding(.bottom,100)
-            //   }
 
             if vm.isLoading {
                 LoadingView()

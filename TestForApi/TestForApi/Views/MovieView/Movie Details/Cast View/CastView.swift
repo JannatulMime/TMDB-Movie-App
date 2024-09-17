@@ -19,20 +19,30 @@ struct CastView: View {
 
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 3) {
+        VStack(alignment: .center, spacing: 3) {
             
             RemoteImage(imagePath: profilePath)
+                .frame(width: 70, height: 70)
                 .clipShape(Circle())
-                .frame(width: 100, height: 100)
+                .padding(.top,10)
+                .padding(.horizontal,10)
+                
                 
             
             Text(name)
                 .font(.caption2)
-                .foregroundStyle(.white)
-                .padding(.horizontal)
-                .lineLimit(1)
-              
-        }
+                .foregroundStyle(.teal)
+                .multilineTextAlignment(.center)
+                .frame(height: 40)
+                .padding(.bottom,5)
+                .padding(.horizontal,10)
+            
+        }.frame(width: 100)
+            .background(RoundedRectangle(cornerRadius: 10).fill(.white)
+                .shadow(color: .yellow, radius: 10)
+            )
+            .padding(15)
+            
     }
 }
 

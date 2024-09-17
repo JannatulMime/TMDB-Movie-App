@@ -59,7 +59,7 @@ struct SingleTopRatedMovieListItem: View {
         }
     }
 
-    let timer = Timer.publish(every: 8, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
 }
 
 #Preview {

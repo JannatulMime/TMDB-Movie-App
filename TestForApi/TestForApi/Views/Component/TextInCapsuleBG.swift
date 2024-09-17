@@ -26,8 +26,9 @@ struct TextInCapsuleBG: View {
 
         Text(text)
             .font(.caption)
-            .foregroundStyle(.blue)
-            .frame(height: 10)
+            .fontWeight(.bold)
+            .foregroundStyle(.teal)
+            .frame(height: 8)
             .padding(10)
             .background(.blueis)
             .clipShape(RoundedRectangle(cornerRadius: 15))

@@ -47,8 +47,7 @@ struct TvSeriesListView: View {
                 }
                 
                 .navigationDestination(isPresented: $vm.goTvSeriesDetailsPage) {
-                    // MovieDetailsView(seriesId: vm.selectedMovie?.id ?? 0)
-                    TvSeriesDetailsView(seriesId: vm.selectedId ?? 0)
+                    MovieDetailsView(movieId: vm.selectedId ?? 0, itemType : ItemType.series)
                 }
                 .navigationBarBackButtonHidden(true)
             }

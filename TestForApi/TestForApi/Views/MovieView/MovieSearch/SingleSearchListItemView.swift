@@ -29,6 +29,7 @@ struct SingleSearchListItemView: View {
             
             Spacer()
         } .padding()
+           
     }
 }
 

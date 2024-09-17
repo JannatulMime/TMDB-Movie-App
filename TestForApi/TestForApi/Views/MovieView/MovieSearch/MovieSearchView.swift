@@ -14,6 +14,8 @@ struct MovieSearchView: View {
 
     var body: some View {
         
+        
+        
         VStack{
             ZStack {
                 CustomSearchView(searchText: $vm.searchText)
@@ -44,6 +46,7 @@ struct MovieSearchView: View {
                 }
             }
         }
+        .padding(.bottom, 20)
       
         .background(.black)
     
@@ -57,10 +60,10 @@ struct MovieSearchView: View {
         }
         
         .navigationDestination(isPresented: $isMoviePressed) {
-            MovieDetailsView(movieId: vm.selectedMovieId)
+            MovieDetailsView(movieId: vm.selectedMovieId, itemType : ItemType.movie)
         }
         .navigationDestination(isPresented: $isSeriesPressed) {
-               TvSeriesDetailsView(seriesId: vm.selectedMovieId )
+            MovieDetailsView(movieId: vm.selectedMovieId, itemType : ItemType.series)
         }
     }
 }

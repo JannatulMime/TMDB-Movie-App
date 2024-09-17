@@ -13,10 +13,6 @@ class BottomMovieDetailsVM : ObservableObject {
   
     @Published var casts : [Cast] = [Cast]()
     @Published var movie: MovieApiModel?
-    @Published var selectedMovie: Int?
-    @Published var goMovieDetailsPage: Bool = false
-    
-
 
     init(){
         

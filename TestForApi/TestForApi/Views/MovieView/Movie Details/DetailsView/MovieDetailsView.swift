@@ -8,7 +8,9 @@ import SwiftUI
 
 struct MovieDetailsView: View {
     @StateObject var vm = MovieDetailsVM()
+    
     var movieId = 1022789
+    var itemType : ItemType = .movie
     @State var offset : CGFloat = 0
     var topEdge : CGFloat = 0
     var maxHeight : CGFloat = 400
@@ -21,7 +23,7 @@ struct MovieDetailsView: View {
             VStack(spacing: 0) {
                 GeometryReader{ proxy in
                     DetailsTopView(imagePath: $vm.backdropImage, topEdge: topEdge, offset: $offset)
-                        .frame(maxWidth: .infinity)
+                       // .frame(maxWidth: .infinity)
                         .frame(height: getHeaderHeight(), alignment : .bottom)
                      
                         .overlay(
@@ -52,7 +54,12 @@ struct MovieDetailsView: View {
                 // CastDetails()
             }
             .onAppear {
-                vm.loadMovieData(movieId: movieId)
+                if itemType == .movie {
+                    vm.loadMovieData(movieId: movieId)
+                }else{
+                    vm.loadTvSeriesData(seriesId: movieId)
+                }
+              
             }
 
             .ignoresSafeArea()
@@ -107,8 +114,12 @@ extension MovieDetailsView {
     }
 
     var bottomView: some View {
+        
         VStack {
-            BottomDetails(movie: $vm.movieDetails,
+            
+            BottomDetails(itemType : itemType,
+                          movie: $vm.movieDetails,
+                          series: $vm.tvSeriesDetails,
                           casts: $vm.casts,
                           similarMovie: $vm.similarMovie,
                           onMovieItemPressed: { _ in
@@ -117,11 +128,42 @@ extension MovieDetailsView {
                           }, onPressed: { _ in
                               vm.goCastDetailsPage = true
                           })
-//
+
                           //  .padding(.top,300)
                           .padding(.horizontal, 0)
+        //    if itemType == .movie {
+//                BottomDetails(itemType : itemType,
+//                              movie: $vm.movieDetails,
+//                              series: $vm.tvSeriesDetails,
+//                              casts: $vm.casts,
+//                              similarMovie: $vm.similarMovie,
+//                              onMovieItemPressed: { _ in
+//                                  vm.goGenreMovieListPage = true
+//                                  // vm.selectedMovie = Details
+//                              }, onPressed: { _ in
+//                                  vm.goCastDetailsPage = true
+//                              })
 //
+//                              //  .padding(.top,300)
+//                              .padding(.horizontal, 0)
+//            }else{
+//                SeriesBottomDetails(tvSeries: $vm.tvSeriesDetails,
+//                            casts: $vm.casts,
+//                            similarTvSeries: $vm.similarMovie, onSeriesItemPressed: { Details in
+//                    vm.goGenreSeriesListPage = true
+//                }, onPressed: { detailsCast in
+//                    vm.goCastDetailsPage = true
+//                  // vm.selectedMovie = Details
+//               })
+//                .padding(.horizontal,0)
+//            }
+//            
+            
+
             Spacer()
         }
+        
+        
+       
     }
 }

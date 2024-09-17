@@ -12,10 +12,15 @@ struct BottomDetails: View {
     @StateObject var vm = BottomMovieDetailsVM()
 
     @State var isViewed = false
+    var itemType : ItemType
     @Binding var movie: MovieApiModel?
+    @Binding var series: TvSeriesApiModel?
     @Binding var casts: [Cast]
     @Binding var similarMovie : [CommonItemData] 
     
+    
+    @State private var selectedMovie: Int?
+    @State private var goMovieDetailsPage: Bool = false
     var movieId = 1022789
     var onMovieItemPressed : (Genre) -> Void
     var onPressed : (Cast) -> Void
@@ -57,20 +62,56 @@ struct BottomDetails: View {
         }
         return ""
     }
+    
+    func getTitle() -> String?{
+        return itemType == .movie ? movie?.title : series?.name
+    }
+    
+    func getRating() -> String? {
+        return itemType == .movie ? movie?.ratingText : series?.ratingText
+    }
+    
+    func getScore() -> String? {
+        return itemType == .movie ? movie?.scoreText : series?.scoreText
+    }
+    
+    func getReleaseDate() -> String? {
+        return itemType == .movie ? movie?.releaseDate  : series?.firstAirDate
+    }
+    
+    func getDuration() -> String? {
+        return itemType == .movie ? movie?.durationText  : series?.durationText
+    }
+    
+    func getLanguage() -> String? {
+        return itemType == .movie ? movie?.originalLanguage  : series?.originalLanguage
+    }
+    
+    func getOverview() -> String? {
+        return itemType == .movie ? movie?.overview : series?.overview
+    }
+    
+    func getGenre() -> [Genre]? {
+       return itemType == .movie ? movie?.genres : series?.genres
+    }
 }
 
 #Preview {
-    BottomDetails(movie: .constant(DummyDataUtils.dummyMovieData01), casts: .constant(DummyCastData.castList), similarMovie: .constant([]) ,onMovieItemPressed: { _ in }, onPressed: { _ in })
+    BottomDetails(itemType : .movie,
+                  movie:
+            .constant(DummyDataUtils.dummyMovieData01),
+                  series: .constant(DummyTvSeries.dummyTvSeries1), casts: .constant(DummyCastData.castList),
+                  similarMovie: .constant([]) ,onMovieItemPressed: { _ in }, onPressed: { _ in })
    
 }
 
 extension BottomDetails {
     var movieTitleWithBookMark: some View {
         HStack {
-            Text(movie?.title ?? "noData")
+            Text(getTitle() ?? "")
                 .font(.title)
                 .fontWeight(.bold)
-                .foregroundStyle(.purple)
+                .foregroundStyle(.teal)
                 .lineLimit(2)
 
             Spacer()
@@ -86,8 +127,10 @@ extension BottomDetails {
 extension BottomDetails {
     var ratingAndScoreText: some View {
         HStack {
-            Text(movie?.ratingText ?? "No Rating").foregroundColor(.yellow)
-            Text(movie?.scoreText ?? "0")
+            Text(getRating() ?? "No Rating")
+                .foregroundColor(.yellow)
+            Text(getScore() ?? "0")
+                .fontWeight(.bold)
                 .foregroundStyle(.white)
 
             if let imdbId = movie?.imdbID {
@@ -105,15 +148,13 @@ extension BottomDetails {
         
         ScrollView(.horizontal, showsIndicators: false) {
                 
-                
                 HStack {
-                    if let genras = movie?.genres {
+                    if let genras = getGenre() {
                         GenraListView(genras: genras)
-                        
                     }
+                    
                     Spacer()
                 }
-              
         }
         
       
@@ -125,24 +166,24 @@ extension BottomDetails {
         HStack(spacing: 20) {
             VStack(alignment: .center) {
                 Text("Release Date")
-                    .foregroundStyle(.gray)
-                Text(movie?.releaseDate ?? "No Data")
                     .foregroundStyle(.white)
+                Text(getReleaseDate() ?? "No Data")
+                    .foregroundStyle(.gray)
             }
 
             VStack(alignment: .center) {
                 Text("Length")
-                    .foregroundStyle(.gray)
-                Text(movie?.durationText ?? "120 Min")
                     .foregroundStyle(.white)
+                Text(getDuration() ?? "120 Min")
+                    .foregroundStyle(.gray)
             }
 
             VStack(alignment: .center) {
                 Text("Language")
-                    .foregroundStyle(.gray)
-
-                Text(movie?.originalLanguage ?? "NoData")
                     .foregroundStyle(.white)
+
+                Text(getLanguage() ?? "NoData")
+                    .foregroundStyle(.gray)
             }
 
             Spacer()
@@ -162,7 +203,7 @@ extension BottomDetails {
                 Spacer()
             }
 
-            Text(movie?.overview ?? "noOverview")
+            Text(getOverview() ?? "noOverview")
                 .foregroundStyle(.gray)
                 .multilineTextAlignment(.leading)
                 .lineLimit(isViewed ? 20 : 3)
@@ -173,10 +214,11 @@ extension BottomDetails {
                     isViewed.toggle()
             }
             .font(.system(size: 15, weight: .semibold))
+            .foregroundStyle(.teal)
             
         }
         .font(.system(size: 15))
-        // .background(.pink)
+        
     }
 }
 
@@ -217,11 +259,11 @@ extension BottomDetails {
     var similarView: some View {
         
         HorizontalMovieListWithTitle(movies: similarMovie, title: "Recommend", onMovieItemPressed: { movie in
-            vm.selectedMovie = movie.id
-            vm.goMovieDetailsPage = true
+            selectedMovie = movie.id
+            goMovieDetailsPage = true
         })
-        .navigationDestination(isPresented: $vm.goMovieDetailsPage) {
-            MovieDetailsView(movieId: vm.selectedMovie ?? 0)
+        .navigationDestination(isPresented: $goMovieDetailsPage) {
+            MovieDetailsView(movieId: selectedMovie ?? 0)
         }
          .navigationBarBackButtonHidden(true)
         

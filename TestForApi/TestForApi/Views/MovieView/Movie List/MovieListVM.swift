@@ -22,7 +22,7 @@ class MovieListVM: ObservableObject {
     @Published var popularMovies = [CommonItemData]()
     @Published var topRatedMovies = [CommonItemData]()
     @Published var upComingMovies = [CommonItemData]()
-   // @Published var similar = [CommonItemData]()
+   
 
     let movieApiService = MovieApiService()
 
@@ -43,16 +43,14 @@ class MovieListVM: ObservableObject {
             async let popular = movieApiService.getMovieListByType(listType: .Popular)
             async let topRated = movieApiService.getMovieListByType(listType: .TopRated)
             async let upcoming = movieApiService.getMovieListByType(listType: .upcoming)
-           // async let similar = movieApiService.getMovieListByType(listType: .similar)
-
-
+         
             _ = await [nowPlaying, popular, topRated, upcoming]
 
             self.nowPlayingMovies = await nowPlaying.0?.getCommonItemDataList() ?? [CommonItemData]()
             self.topRatedMovies = await topRated.0?.getCommonItemDataList()  ?? [CommonItemData]()
             self.upComingMovies = await upcoming.0?.getCommonItemDataList() ?? [CommonItemData]()
             self.popularMovies = await popular.0?.getCommonItemDataList() ?? [CommonItemData]()
-          //  self.similar = await similar.0?.getCommonItemDataList() ?? [CommonItemData]()
+        
             isLoading = false
 
         }

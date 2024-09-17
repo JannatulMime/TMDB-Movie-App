@@ -23,11 +23,11 @@ class SearchVM : ObservableObject {
         Task {
             
             if selectedSearchType == .Movie {
-                let (data, error) = await movieApiService.searchMovie(searchKeyword: searchText)
+                let (data, _) = await movieApiService.searchMovie(searchKeyword: searchText)
                 movieList = data?.getCommonItemDataList() ?? [CommonItemData]()
             }else{
                 // Tv Series
-                let (data, error) = await tvSeriesApiService.searchTvSeries(searchKeyword: searchText)
+                let (data, _) = await tvSeriesApiService.searchTvSeries(searchKeyword: searchText)
                 movieList = data?.getCommonItemDataList() ?? [CommonItemData]()
             }
             
